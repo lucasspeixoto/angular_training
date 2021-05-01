@@ -1,0 +1,44 @@
+
+Serviços
+
+* Serviços são classes responsáveis por buscar e enviar dados do servidor.
+* Úteis para não repetir código no sistema.
+* Fornece lógica de negócio.
+* Componentes vai ser responsável apenas por iterações do usuário com a tela
+* Serviços vão conter classes utilitárias (Tradução, formatação de texto/variáveis, etc..).
+
+A Injeção de depedência é diponibilizar em uma classe os recursos de outra e isso pode ser
+feito via construtores, métodos setters ou atributos.
+
+Todo serviço precisa ser informado ao Angular que é um fornecedor, um provider
+Não é preciso o decorator @Injectable para injetar o serviço na outra classe,
+na verdade você vai usar esse decorator no seu serviço quando o seu próprio serviço
+precisar receber injeções do framework para fazer alguma coisa,
+como por exemplo o HTTP e outras.
+
+Singleton x Várias instâncias
+Quando colocamos nosso serviço (CursosService) dentro do providers do app.module, essa classe
+é instanciada apenas uma vez apesar de ser utilizada em 2 componentes (cursos e criar-cursos)
+
+Obs: No app.module usamos o BrowserModule, nos módulos de funcionalidade o CommonModule.
+Se tivermos mais de um módulo que possui componentes que utilizam o serviço CursosService,
+e nos providers desses módulos colocarmos o nosso serviço, ainda assim ele será instanciado
+uma única vez (padrão singleton).
+Se quisermos que apenas um componente utilize determinado serviço podemos colocar esse componentes
+em um provider dos metadados:
+@Component({
+  selector: 'app-criar-curso',
+  templateUrl: './criar-curso.component.html',
+  styleUrls: ['./criar-curso.component.css'],
+  providers: [CursosService]
+})
+Nesse caso, se colocarmos o providers como metadado em vários componentes, será criado
+várias instancias dessa classe do nosso serviço.
+Podemos ter uma situação onde usaremos serviços específicos em componentes diferentes onde é
+necessário que esses serviços se comuniquem (brodcast de eventos).
+
+Quando queremos comunicação entre componentes pai e componente filho, usamos Input e Output.
+Quando queremos comunicação entre componentes independentes fazemos isso via serviço.
+
+Quando definimos um atributo de uma classe ou método como static, não precisamos da instancia para poder acessar.
+Explicação: https://fireship.io/lessons/sharing-data-between-angular-components-four-methods/

@@ -1,0 +1,21 @@
+input {
+  font-size: 1.4rem;
+  width: 50px;
+}
+
+button {
+  margin: 5px;
+  height: 40px;
+  width: 60px;
+  border-radius: 15%;
+  background-color: #0c6262;
+  color: #fff;
+  font-size: 1.0rem;
+}
+
+p {
+  margin: 15px;
+  color: #000;
+  font-weight: bold;
+  font-size: 1.4rem;
+}

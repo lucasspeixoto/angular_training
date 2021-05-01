@@ -1,0 +1,80 @@
+-> Babel é um compilador js, que vai converter códigos ts, js(ES2015) para js puro
+-> Decorator: usado para adicionar funcionalidades extras para funções e classes
+-> Para organizar melhor nosso app, podemos criar outros módulos (ng )
+-> O módulo de funcionalidaes, diferente do módulo raiz (app.module.ts), não importa o BrowserModule, mas sim o CommonModule.
+-> Podemos manter alguns componentes restritos ao módulo, como o componente cursos-detalhe, que
+foi criado dentro da pasta cursos, que ja tinha o componente cursos, o curso-detalhe vamos exibir dentro
+do curso (curso.component.html), mas se tentar-mos colocar em app.component.html, não vai exibir,
+ja que não colocamos em exports dentro do cursos.module.ts 
+-> Injeção de dependências é fazer com que o Angular crie uma instância de uma classe dentro da classe do nosso componente.
+-> Hoje não é mais necessário setar os serviços no providers dos módulos
+-> Data Binding: Associar informações do componente para o template. e vice versa.
+Essa comunicação entre template e componente pode ser feita de algumas formas:
+
+-----> Interpolação {{valor}}                                           Componente ---> Template
+ <p>String Renderizada: {{ url }}</p>
+
+-----> Property Binding/Class Binding ([propriedade]="valor")           Componente ---> Template
+Ex: Com o #classe (change)="0" obtemos o valor selecionado como opção.
+Se o valor da select for 'alert-warning' a div é exibida (block), caso contrário não (none)
+<select #classe (change)="0">
+        <option value="alert-success">Sucesso</option>
+        <option value="alert-dark">Dark</option>
+        <option value="alert-warning">Alerta</option>
+        <option value="alert-primary">Erro</option>
+      </select>
+<div class="class.alert-warning" role="alert"
+[style.display]="classe.value == 'alert-warning' ? 'block' : 'none'">
+Esse Erro apareçe em caso de Warning
+</div>
+
+-----> Event Binding (click, focus, etc...)                             Template ---> Componente
+<input type="text"
+      (keyup)="onKeyUp($event)"
+      (keyup.enter)="salvarValor(campoInput.value)"
+      (blur)="salvarValor(campoInput.value)"
+#campoInput />
+
+-----> Two Way Data Binding [(ngModel)]="propriedade"                   Componente ---> Template
+Aqui usamos o binding de evento e de propriedade juntos.
+o ngModel é a representação de uma entidade, que pode ser um campo simples até um objeto. Ele é
+uma diretiva do Angular que pertence ao FormsModule
+[(ngModel)] = bindon-ngModel (por tras dos panos)
+Caso vamos criar algum formulario que usaremos o ngModel, é necessário importa o FormsModule nesse
+módulo.
+
+<!-- Two Way Data Binding -->
+  <div class="property-binding">
+    <h2 style="color: #080;">Two Way Data Binding</h2>
+    <input
+      type="number"
+      [(ngModel)]="x"
+      (change)="checksomaxy()"
+      >
+      <input
+      type="number"
+      [(ngModel)]="y"
+      (change)="checksomaxy()"
+      >
+    <p>{{somaxy}}</p>
+    <button (click)="checksomaxy()">Check</button>
+  </div><br><br>
+
+
+Para passar propriedades de um componente para o outro, utilizamos o input property
+
+Podemos usar o EventEmiter para detectar eventos em um componente filho e passar essa 
+informação para o componente pai.
+
+Ciclos de vida dos componentes
+
+  #1 - ngOnChanges: Antes do evento #2 e quando o valor property-binding é atualizado.
+  #2 - ngOnInit: Quando o componente é inicializado.
+  #3 - ngDoCheck: A cada ciclo de verificação de mudanças.
+  #4 - ngAfterContentInit: Depois de inserir algum conteúdo externo na View.
+  #5 - ngAfterContentChecked: A cada verificação de conteúdo inserido.
+  #6 - ngAfterViewChecked: A cada verificação de conteúdo / conteúdo filho.
+  #7 - ngOnDestroy: Antes da diretiva ou componente ser destruído.
+
+Quando for trabalhar com componentes filhos, usar o ngOnChanges no lugar do ngOnInit, pois é
+um evento disparado quando valores de input-property são alterados.

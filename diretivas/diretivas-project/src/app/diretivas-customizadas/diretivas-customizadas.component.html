@@ -1,0 +1,48 @@
+<h2 style="color:'#ff003c'">Diretivas de atributo Customizadas</h2>
+<p appFundoAzul>Texto com fundo azul</p>
+
+<button appFundoAzul>Botão Primary</button>
+
+<br><br>
+
+<p appHighlightMouse>
+Texto com highlight quando passa o mouse
+</p>
+
+<br><br>
+
+<p appHighlight [defaultColor]="'grey'" [highlightColor]="'red'">
+Texto com cores customizadas
+</p>
+
+<br><br>
+
+<p appFontsize
+[defaultFont]="'10px'"
+[mouseenterFont]="'45px'"
+
+[defaultColor]="'grey'"
+[highlightColor]="'red'"
+>
+ Texto com fonte customizada
+</p>
+
+<h2 style="color:'#ff003c'">Diretivas Estruturais Customizadas</h2>
+
+
+<div *ngIf="mostraCursos">
+  <h3 style="color:'#004cff'">Lista de Cursos aqui</h3>
+</div>
+
+<div *appNgelse="mostraCursos">
+  <h3 style="color:'#4cf702'">Não Existem Cursos</h3>
+</div>
+<br>
+<!-- Por tras dos panos
+<template [appNgelse]="mostraCursos">
+  <div>
+    Não Existem Cursos
+  </div>
+</template> -->
+<button class="btn btn-warning"
+(click)="onMostrarCursos()">Show/Hide</button>

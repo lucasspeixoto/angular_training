@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="nav navbar-nav">
+    <a class="nav-item nav-link" [class.active]="aba == 'home'" (click)="aba = 'home'">Home</a>
+    <a class="nav-item nav-link" [class.active]="aba == 'map'" (click)="aba = 'map'">Mapa</a>
+    <a class="nav-item nav-link" [class.active]="aba == 'list'" (click)="aba = 'list'">Lista</a>
+  </div>
+</nav>
+
+<div class="container" [ngSwitch]="aba">
+  <!-- Usamos ngSwitch como property binding pois precisamos escutar o evento. -->
+  <p *ngSwitchCase="'list'">Modo Lista Ativado</p>
+  <p *ngSwitchCase="'map'">Modo Mapa Ativado</p>
+  <p *ngSwitchDefault>Modo Home Ativado</p>
+</div><br>
+
+<!-- Por tras dos Planos, ao usar a diretiva ngSwitchCase o Angular usa um template -->
+<div class="container" [ngSwitch]="aba">
+  <ng-template [ngSwitchCase]="'map'">
+    <p>Modo Mapa Ativado</p>
+  </ng-template>
+  <ng-template [ngSwitchCase]="'list'">
+    <p>Modo Lista Ativado</p>
+  </ng-template>
+  <ng-template [ngSwitchCase]="'home'" ngSwitchDefault>
+    <p>Modo Home Ativado</p>
+  </ng-template>
+</div>

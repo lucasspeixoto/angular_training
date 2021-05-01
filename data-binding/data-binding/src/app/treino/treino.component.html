@@ -1,0 +1,63 @@
+<h1>Exercícios</h1>
+<div>
+  <!-- Interpolação -->
+  <div class="property-binding">
+    <h2 style="color: #fcad03;">Interpolation</h2>
+    <p>Nome: <b>{{people.name}}</b> | Idade: <b>{{people.age}} anos!</b></p>
+  </div><br><br>
+
+  <!-- Property Binding -->
+  <div class="property-binding">
+    <h2 style="color: #FF0000;">Property Binding</h2>
+    <select #classe (change)="0">
+      <option value="alert-success">Sucesso</option>
+      <option value="alert-dark">Dark</option>
+      <option value="alert-warning">Alerta</option>
+      <option value="alert-primary">Erro</option>
+    </select>
+    <div class="class.alert-warning" role="alert" [style.display]="classe.value == 'alert-warning' ? 'block' : 'none'">
+      Esse Erro apareçe em caso de Warning
+    </div>
+    <br>
+    <!-- <h3 [style.color]="classe.value != 'alert-success' ? 'red' : 'green'">Estilo com property binding</h3> -->
+  </div><br><br>
+
+  <!-- Event Binding -->
+  <div class="event-binding">
+    <h2 style="color: #008;">Event Binding</h2>
+    <div>
+      <input type="text" (keyup.enter)="salvarInput1(value1.value)" #value1>
+      <input type="text" (keyup.enter)="salvarInput2(value2.value)" #value2>
+      <button (click)="somar(value1.value, value2.value)">Somar</button>
+      <p>{{soma}}</p>
+    </div>
+  </div><br><br>
+
+  <!-- Two Way Data Binding -->
+  <div class="property-binding">
+    <h2 style="color: #080;">Two Way Data Binding</h2>
+    <input type="number" [(ngModel)]="x" (change)="checksomaxy()">
+    <input type="number" [(ngModel)]="y" (change)="checksomaxy()">
+    <p>{{somaxy}}</p>
+    <!-- <button (click)="checksomaxy()">Check</button> -->
+  </div><br><br>
+
+  <!-- Input Properties -->
+  <div class="input-property">
+    <h2 style="color: #5B2C6F;">Input Property</h2>
+
+    <app-curso [nome]="nomeDoCurso"></app-curso>
+    <!-- Aqui passamos a propriedade nomeDoCurso de treino.componente para o
+    seletor app-curso, ou seja, se dentro do componente input-property fizermos
+    a exposição (@Input) vamos poder usar esse valor dentro do input-property  -->
+
+  </div><br><br>
+
+  <!-- Output Properties -->
+  <div class="output-property">
+    <h2 style="color: #c0c90e;">Output Property</h2>
+    <contador [valor]="valorInicial" (mudouValor)="onMudouValor($event)">
+    </contador>
+
+  </div><br><br>
+</div>

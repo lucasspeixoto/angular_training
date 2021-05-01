@@ -1,0 +1,111 @@
+<section class="property-binding">
+  <article>
+    <!-- <h2>Interpolation / Interpolação</h2> -->
+    <!-- <p>String Renderizada: {{ url }}</p> -->
+    <!-- Interpolação -->
+    <!-- <p>Resultado de 1 + 1 = {{ 1 + 1 }}</p> -->
+    <!-- Interpolação -->
+    <!-- <p>Resultado de 1 + 1 = {{ 1 + 1 + getValor() }}</p> -->
+    <!-- Interpolaçao -->
+    <!-- <p>Gosto de Angular? {{ cursoAngular && getCurtirCurso() }}</p>  -->
+    <!-- Interpolaçao -->
+
+    <!-- <h2>Property Binding</h2>
+    <img src="{{ urlImage }}">
+    <p></p> -->
+    <!-- <img [src]="urlImage"> -->
+    <!-- = <img bind-src="urlImage"> -->
+  </article>
+  <!-- <article>
+     <h3>Class e Style Binding</h3>
+    <div>Selecione uma classe:
+      <select #classe (change)="0">
+        <option value="alert-success">Sucesso</option>
+        <option value="alert-dark">Dark</option>
+        <option value="alert-warning">Alerta</option>
+        <option value="alert-primary">Erro</option>
+      </select>
+      <br><br>
+
+      <div class="alert" role="alert" [class.alert-success]="classe.value == 'alert-success'">
+        Sucesso
+      </div>
+
+      <div class="alert" role="alert" [class.alert-dark]="classe.value == 'alert-dark'">
+        Dark
+      </div>
+
+      <div class="alert" role="alert" [class.alert-warning]="classe.value == 'alert-warning'">
+        Alerta
+      </div>
+
+      <div class="alert" role="alert" [class.alert-primary]="classe.value == 'alert-primary'">
+        Primary
+      </div>
+
+      <div class="alert {{ classe.value }}" role="alert">TESTE</div>
+
+      <div class="class.alert-warning" role="alert"
+      [style.display]="classe.value == 'alert-warning' ? 'block' : 'none'">
+        Esse Erro apareçe em caso de Warning
+      </div>
+
+    </div>
+  </article> -->
+  <article>
+    <h3>Event Binding</h3>
+    <div>
+      <button class="btn btn-primary" (click)="clicked()">
+        Clique
+      </button>
+      <br>
+      <!-- Para informar ao Angular que queremos escutar o valor, precisamos colocar entre parênteses -->
+      <input type="text"
+        (keyup)="onKeyUp($event)"
+        (keyup.enter)="salvarValor($any($event.target).value)"
+        (blur)="salvarValor($any($event.target).value)" />
+      <br>
+      <h4> Valor Atual: {{valorInput}}</h4>
+      <h4> Valor salvo: {{valorSalvo}}</h4>
+
+      <!-- Outra Forma: Usando variável do template -->
+      <input type="text"
+        (keyup)="onKeyUp($event)"
+        (keyup.enter)="salvarValor(campoInput.value)"
+        (blur)="salvarValor(campoInput.value)"
+        #campoInput />
+      <br>
+      <h4> Valor Atual: {{valorInput}}</h4>
+      <h4> Valor salvo: {{valorSalvo}}</h4>
+      <br><br>
+      <span
+        (mouseover)="onMouseOverOut()"
+        (mouseout)="onMouseOverOut()"
+        [class.highlight]="isMouseOver">Passe o mouse
+      </span>
+    </div>
+  </article>
+</section>
+<br><br>
+<section class="two-way-binding">
+  <article>
+    <h3>Two-Way data binding</h3>
+    <input type="text"
+    [value]="nome1"
+    (input)="nome1 = $any($event.target).value"
+    (keyup.enter)="printInput1(nome1)"
+    >
+    <br><br>
+    <input type="text"
+    [value]="nome2"
+    (ngModelChange)="nome2 = $event"
+    (keyup.enter)="printInput2(nome2)">
+    <br><br>
+    <input type="text"
+    [(ngModel)]="nome3"
+    (keyup.enter)="printInput3(nome3)">
+    <br><br>
+  </article>
+</section>
+
+<app-meu-form></app-meu-form>

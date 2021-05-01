@@ -1,0 +1,37 @@
+<h4>*ngIf</h4>
+
+<div *ngIf="cursos.length > 0">
+  Lista de Cursos
+</div>
+<div *ngIf="mostrarCursos">
+  Lista de Cursos aqui
+</div>
+<div *ngIf="!mostrarCursos">
+  Não Existem cursos
+</div>
+<br>
+<button class="btn btn-primary"(click)="onMostrarCursos()">Exibir</button>
+
+<h4>Hidden como alternativa</h4>
+<div [hidden]="!mostrarCursos">
+  Lista de Cursos aqui
+</div>
+<div [hidden]="mostrarCursos">
+  Não Existem cursos
+</div>
+
+<br>
+
+<h4>Entendendo o '*'</h4>
+<div *ngIf="mostrarCursos">
+  Lista de Cursos aqui
+</div>
+
+<!-- Ao usar o * o Angular por tras dos panos usa um <template> -->
+<ng-template [ngIf]="mostrarCursos">
+  <div>Lista de Cursos aqui</div>
+</ng-template>
+<!-- Outra forma -->
+<div template="ngIf mostrarCursos">
+  Lista de Cursos aqui
+</div>

@@ -1,0 +1,34 @@
+<p>pai works!</p>
+<!-- Tabela -->
+<h1>Lista de Cursos - Componente Pai</h1>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Curso</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let curso of cursos">
+      <td>{{curso}}</td>
+    </tr>
+  </tbody>
+</table>
+<!-- Input e botão para criar curso -->
+<div>
+  <div class="input-group add">
+    <div class="input-group-prepend add">
+      <input type="text" class="add" placeholder="Curso..." #cursoInput>
+      <button
+        class="btn btn-primary"
+        (click)="onAddCurso(cursoInput.value)"
+        >
+        +
+      </button>
+  </div>
+</div>
+<br>
+
+<app-filho
+  [cursos]="cursos"
+  (adicionouCurso)="adicionouNoFilho($event)"
+></app-filho>

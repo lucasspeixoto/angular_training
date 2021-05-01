@@ -1,0 +1,31 @@
+<!-- List Group -->
+<h2>Lista de Cursos -criar-curso.component</h2>
+<ul class="list-group">
+  <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let curso of cursos">
+    {{curso.name}}
+    <span class="badge badge-primary badge-pill">{{curso.qnt}}</span>
+  </li>
+</ul>
+
+<br>
+
+<div>
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="">Curso</span>
+      <input type="text" #cursoInput placeholder="Curso"><br>
+  </div>
+  <div class="input-group"></div>
+      <span class="input-group-text" id="">Vagas</span>
+      <input type="text" #qntInput placeholder="Vagas">
+  </div><br>
+  <button
+  class="btn btn-primary"
+  (click)="onAddCurso(cursoInput.value, qntInput.value)">
+    Add
+  </button>
+</div>
+
+<br>
+
+<app-receber-curso-criado></app-receber-curso-criado>

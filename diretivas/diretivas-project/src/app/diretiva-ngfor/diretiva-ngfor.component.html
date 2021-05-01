@@ -1,0 +1,17 @@
+<h1>Lista de Cursos</h1>
+
+<ul>
+  <li *ngFor="let curso of cursos, let i = index" >
+    {{i+1}}º: {{curso}}</li>
+</ul><br>
+
+<!-- Por tras dos panos, ao utilizar um ngFor, o Angular utiliza um template -->
+<ul>
+  <ng-template ngFor [ngForOf]="cursos" let-curso let-i="index">
+    <li>
+      {{i+1}}º: {{curso}}
+    </li>
+  </ng-template>
+
+
+</ul>

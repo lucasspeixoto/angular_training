@@ -1,0 +1,4 @@
+<p>Descrição: <strong>{{ tarefa.desc }}</strong></p>
+<p>Responsável: <strong>{{ tarefa.resp != null ? tarefa.resp.nome : '' }}</strong></p>
+<!-- Com operador Elvis -->
+<p>Responsável: <strong>{{ tarefa.resp?.nome }}</strong></p>

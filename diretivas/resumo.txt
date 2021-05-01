@@ -1,0 +1,95 @@
+Diretivas são instruções.
+
+Existem dois tipos de diretivas
+    -> Estruturais: Interage, com a view e modificam a estrutora do DOM e/ou código HTML (Ex: *ngFor e *ngIf)
+    -> De atributo: Interagem com o elemento em que foram aplicadas (Ex: ng-class e ng-style).
+
+ngIf
+Quando um elemento é exibido ou destruido com o ngIf, o DOM é modificado, e temos que ter cuidado
+pois isso pode ter custos de desempenho. Um alternativa para isso é usar um property binding com o hidden.
+O hidden é recomendado para árvores de elementos pequenas e o *ngIf para árvores grandes.
+É menos custoso usar [hidden] caso o custo de cruar a árvore de elementos seja grande.
+O hidden pode trazer problemas de segurança, ex: Caso seja necessário mostrar determinado conteúdo
+para um tipo específico de usuário, usar o hidden, vamos expor o elementos no console, mesmo não
+exibindo na view.
+
+ngSwitch e ngSwitchCase
+Permite Gerar um SwitchCase e renderizar apenas a clausula que cair dentro do caso.
+
+ngFor
+
+ngClass
+
+ngStyle
+
+O Operador Elvis ("?") permite fazer navegação segura entre os componentes
+
+ngContent:
+É uma diretiva para passagem de conteúdo do template para o componente.
+O conteúdo por ser um texto ou até um outro componente.
+Ex:
+  Em app.component.html:
+  <app-ng-content>
+    <div class="titulo">Título do Card</div>
+    <div class="corpo">Conteúdo do Card</div>
+  </app-ng-content>
+
+  Em ng-content.component.html:
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <ng-content select=".titulo"></ng-content>
+    </div>
+    <div class="card-body">
+      <ng-content select=".corpo"></ng-content>
+    </div>
+  </div>
+
+
+Criação de diretiva: ng g d
+
+HostListener: É uma classe que vai escutar no elemento que é o
+Host (Aquele que aplicamos a diretiva). Escuta evento no hospedeiro da diretiva (tag p)
+Ex:
+//'mouseenter' é o evento que estamos escutando. onMouseOver() é a função que será chamada ao disparar o evento
+@HostListener('mouseenter') onMouseEnter() {
+  this._renderer.setStyle(
+    this._elementRef.nativeElement,
+    'background-color', 'yellow'
+  )
+}
+
+@HostListener('mouseleave') onMouseLeave() {
+  this._renderer.setStyle(
+    this._elementRef.nativeElement,
+    'background-color', 'white'
+  )
+}
+
+HostBinding: Permite fazer a ligação de um determinado atribuído da diretiva
+a determinado atribuído html
+Ex:
+// Associa um atributo ou classe html a uma variável na Direitva
+@HostListener('mouseenter') onMouseEnter() {
+  this.backgroundColor = 'yellow'
+}
+
+@HostListener('mouseleave') onMouseLeave() {
+  this.backgroundColor = 'white'
+}
+
+@HostBinding('style.backgroundColor') backgroundColor!: string
+
+Qualquer modificação extra que for necessário antes de mudar um atributo com o HostBinding,
+pode ser feito com get e setters
+Ex:
+@HostBinding('style.backgroundColor') get setColor() {
+  //Código extra (manipulação da variável backgroundColor antes de setar no html)
+  return this.backgroundColor
+}
+private backgroundColor!: string
+
+get setColor(): Escuta sempre que modificar
+
+
+
+
