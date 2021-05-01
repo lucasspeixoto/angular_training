@@ -3,3 +3,18 @@ Pipes
 Um pipe transforma um valor.
 
 Não precisamos importar os pipes, que estão dentro de 'angular/common'
+
+Criação de um pipe: ng g p camel-case
+
+Os pipes precisam ser importados nos módulos onde serão utilizadas e é necessário também
+incluir nos declarations.
+
+OBS: Não filtre arrays com pipe em projetos reais ?
+
+Pipes Puros x Pipes Impuros
+
+O pipes puros não olham para as transformações que ocorrem no valor passado no método
+'transform(vale: .....)', diferente do que ocorre com os pipes impuros.
+
+Pipes Async: Server para ter uma saida no template mesmo que o valor a ser atribuido ainda não retorne
+do backend.

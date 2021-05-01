@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { interval } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 @Component({
   selector: 'app-exemplos-pipes',
   templateUrl: './exemplos-pipes.component.html',
@@ -15,6 +18,37 @@ export class ExemplosPipesComponent implements OnInit {
     dataLancamento: new Date(2016, 5, 23),
     url: 'http://a.co/7KICIUB'
   }
+
+  filtro: string = ''
+
+  livros: string[] = ['Angular 11', 'Python', 'React Native']
+
+  addLivro(addLivro: string) {
+    this.livros.push(addLivro)
+    console.log(this.livros)
+  }
+
+  //Função para filtrar livro
+  obterLivro() {
+    if (
+      this.livros.length === 0 ||
+      this.filtro === undefined ||
+      this.filtro.trim() === '')
+      {
+      return this.livros
+      }
+
+    const filter = this.filtro.toLocaleString().toLocaleLowerCase();
+    return this.livros.filter(
+      (v: string) => v.toLocaleLowerCase().includes(filter)
+    )
+  }
+
+  valorAsync = new Promise((resolve, reject) => {
+    setTimeout(() => resolve('Valor assíncrono'), 2000)
+  })
+
+  valorAsync2 = interval(2000).pipe(map((valor:any) => 'Valor assíncrono 2'));
 
   constructor() { }
 

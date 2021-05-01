@@ -8,7 +8,17 @@ table {
   margin-left: 10px;
 }
 
-h1, h2, h3, h4, h5, h6 {
+input {
+  width: 15%;
+  margin-left: 10px;
+}
+
+h3, h4, h5, h6 {
+  margin-left: 10px;
+}
+
+h2 {
+  color:blue;
   margin-left: 10px;
 }
 
