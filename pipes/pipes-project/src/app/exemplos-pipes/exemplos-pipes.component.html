@@ -1,0 +1,18 @@
+<!-- <p>Título: {{ livro.titulo }}</p>
+<p>Estrelas: {{ livro.rating }}</p>
+<p>Páginas: {{ livro.numeroPaginas }}</p>
+<p>Preço: {{ livro.preco }}</p>
+<p>Data de Lançamento: {{ livro.dataLancamento }}</p>
+<p>Url: {{ livro.url }}</p> -->
+
+<h2>Exemplo de pipes</h2>
+<ul class="list-group">
+  <li class="list-group-item">Título: {{ livro.titulo | uppercase | lowercase }}</li>
+  <li class="list-group-item">Estrelas: {{ livro.rating | number:'1.1-1' }}</li>
+  <li class="list-group-item">Páginas: {{ livro.numeroPaginas | number }}</li>
+  <li class="list-group-item">Preço: {{ livro.preco | currency:'BRL' }}</li>
+  <li class="list-group-item">Data de Lançamento: {{ livro.dataLancamento | date:'dd/MM/yyyy' }}</li>
+  <li class="list-group-item">Url: {{ livro.url }}</li>
+  <br>
+  <li class="list-group-item">Livro: {{ livro | json }}</li>
+</ul>

@@ -1,0 +1,5 @@
+Pipes
+
+Um pipe transforma um valor.
+
+Não precisamos importar os pipes, que estão dentro de 'angular/common'
