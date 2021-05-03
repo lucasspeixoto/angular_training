@@ -16,10 +16,11 @@ export class IndependenteComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.cursos = this.cursosService.getCurso()
-    CursosService.criouNovoCurso.subscribe(
-      cursoAdd => this.cursos.push(cursoAdd)
+    this.cursos = this.cursosService.getCursos()
+    CursosService.adicionouCurso.subscribe(
+      addCurso => this.cursos.push(addCurso)
     )
   }
+
 
 }

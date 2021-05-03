@@ -15,15 +15,15 @@ export class PaiComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.cursos = this.cursosService.getCurso()
+    this.cursos = this.cursosService.getCursos()
   }
 
   onAddCurso(curso: string) {
-    this.cursosService.addCurso(curso)
+    this.cursosService.AddCursos(curso)
   }
 
   adicionouNoFilho(event: any) {
-    console.log(`Mensagem do Filho: ${event}`)
+    console.log(`Mensgem do Filho: ${event}`)
   }
 
 }

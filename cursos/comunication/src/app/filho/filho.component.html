@@ -12,18 +12,15 @@
     </tr>
   </tbody>
 </table>
-
 <!-- Input e botão para criar curso -->
 <div>
   <div class="input-group add">
     <div class="input-group-prepend add">
-      <input type="text" class="add" placeholder="Curso..." #cursoInput>
-      <button
-        class="btn btn-primary"
-        (click)="onAddCurso(cursoInput.value)"
-        >
-        +
-      </button>
+      <input type="text" #cursosInput>
+      <button class="btn btn-warning"
+      (click)="onAddCurso(cursosInput.value)">
+      Add
+    </button>
   </div>
 </div>
 <br>
