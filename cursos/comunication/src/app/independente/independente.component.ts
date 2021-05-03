@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { CursosService } from '.././services/cursos.service'
-
+import { CursosService } from './../services/cursos.service';
 @Component({
   selector: 'app-independente',
   templateUrl: './independente.component.html',
@@ -17,12 +16,10 @@ export class IndependenteComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.cursos = this.cursosService.getCursos()
+    this.cursos = this.cursosService.getCurso()
     CursosService.criouNovoCurso.subscribe(
       cursoAdd => this.cursos.push(cursoAdd)
     )
   }
-
-
 
 }

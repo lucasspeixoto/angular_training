@@ -1,7 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { CursosService } from '.././services/cursos.service'
-
+import { CursosService } from './../services/cursos.service';
 @Component({
   selector: 'app-filho',
   templateUrl: './filho.component.html',
@@ -10,7 +9,7 @@ import { CursosService } from '.././services/cursos.service'
 export class FilhoComponent implements OnInit {
 
   @Input('cursos') cursos: string[] = []
-  @Output('adicionouCurso') adicionouCurso = new EventEmitter<string>()
+  @Output('adicionouCurso') adicionouCurso = new EventEmitter()
 
   constructor(
     private cursosService: CursosService
@@ -21,8 +20,7 @@ export class FilhoComponent implements OnInit {
 
   onAddCurso(curso: string) {
     this.cursosService.addCurso(curso)
-    this.adicionouCurso.emit('Adicionei')
+    this.adicionouCurso.emit('Adicionei PAI...')
   }
-
 
 }

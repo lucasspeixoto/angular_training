@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { CursosService } from '.././services/cursos.service'
-
+import { CursosService } from './../services/cursos.service';
 @Component({
   selector: 'app-pai',
   templateUrl: './pai.component.html',
@@ -16,8 +15,7 @@ export class PaiComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.cursos = this.cursosService.getCursos()
-
+    this.cursos = this.cursosService.getCurso()
   }
 
   onAddCurso(curso: string) {

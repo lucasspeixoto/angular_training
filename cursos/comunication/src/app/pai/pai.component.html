@@ -1,4 +1,3 @@
-<p>pai works!</p>
 <!-- Tabela -->
 <h1>Lista de Cursos - Componente Pai</h1>
 <table class="table">
@@ -13,6 +12,7 @@
     </tr>
   </tbody>
 </table>
+
 <!-- Input e botão para criar curso -->
 <div>
   <div class="input-group add">
@@ -29,6 +29,8 @@
 <br>
 
 <app-filho
-  [cursos]="cursos"
-  (adicionouCurso)="adicionouNoFilho($event)"
-></app-filho>
+[cursos]="cursos"
+(adicionouCurso)="adicionouNoFilho($event)">
+</app-filho>
+
+<app-independente></app-independente>
