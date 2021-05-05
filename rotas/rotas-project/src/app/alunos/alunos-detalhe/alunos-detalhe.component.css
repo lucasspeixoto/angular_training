@@ -1,0 +1,33 @@
+ul {
+  width: 20%;
+  margin-left: 10px;
+}
+
+table {
+  width: 25%;
+  margin-left: 10px;
+}
+
+h1, h2 {
+  margin-left: 10px;
+}
+
+.add {
+  width: 80%;
+}
+
+.add div {
+  margin-left: 10px;
+}
+
+.add a {
+  margin-left: 10px;
+}
+
+.add button {
+margin-left: 0px;
+}
+
+.add input {
+  margin-left: 0px;
+  }

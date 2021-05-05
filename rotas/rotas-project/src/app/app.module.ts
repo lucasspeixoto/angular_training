@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 
 import { CursosModule } from './cursos/cursos.module';
 import { AppRoutingModule } from './app-routing.module';
+import { AlunosModule } from './alunos/alunos.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     BrowserAnimationsModule,
     CursosModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AlunosModule
   ],
   providers: [],
   bootstrap: [AppComponent]
