@@ -7,12 +7,14 @@ import { AlunosDetalheComponent } from './alunos-detalhe/alunos-detalhe.componen
 import { AlunosFormComponent } from './alunos-form/alunos-form.component';
 import { AlunosRoutingModule } from './alunos.routing.module';
 import { AlunosService } from './alunos.service';
+import { AlunoNaoEncontradoComponent } from './aluno-nao-encontrado/aluno-nao-encontrado.component';
 
 @NgModule({
   declarations: [
     AlunosComponent,
     AlunosFormComponent,
-    AlunosDetalheComponent
+    AlunosDetalheComponent,
+    AlunoNaoEncontradoComponent
   ],
   imports: [
     CommonModule,

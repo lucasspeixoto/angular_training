@@ -33,7 +33,7 @@ export class CursoDetalheComponent implements OnInit {
 
         if (this.curso == null) {
           //Redireciona a rota
-          this.router.navigate(['/naoEncontrado'])
+          this.router.navigate(['cursos/naoEncontrado'])
         }
       }
     )
