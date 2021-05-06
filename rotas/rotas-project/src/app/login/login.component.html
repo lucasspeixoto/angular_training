@@ -1,1 +1,48 @@
-<p>login works!</p>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Yinka Enoch Adedokun">
+  <title>Login Page</title>
+</head>
+
+<body>
+  <!-- Main Content -->
+  <div class="container-fluid">
+    <div class="row main-content bg-success text-center">
+      <div class="col-md-4 text-center company__info">
+        <span class="company__logo">
+          <h2><span class="fa fa-android"></span></h2>
+        </span>
+        <h4 class="company_title">Login Form</h4>
+      </div>
+      <div class="col-md-8 col-xs-12 col-sm-12 login_form ">
+        <div class="container-fluid">
+          <div class="row">
+            <h2>Login</h2>
+          </div>
+          <div class="row">
+            <form control="" class="form-group">
+              <div class="row">
+                <input [(ngModel)]="usuario.nome" [ngModelOptions]="{standalone: true}" type="text" id="usuario"
+                  class="validate form__input" placeholder="Username">
+                <!-- <label for="usuario" class="active"></label> -->
+              </div>
+              <div class="row">
+                <!-- <span class="fa fa-lock"></span> -->
+                <input [(ngModel)]="usuario.senha" [ngModelOptions]="{standalone: true}" type="password" id="senha"
+                  class="validate form__input" placeholder="Password">
+                <!--  <label for="usuario" class="active"></label> -->
+              </div>
+              <div class="row">
+                <button type="submit" class="btn" (click)="Login()">Entrar</button>
+              </div>
+            </form>
+          </div>
+          <div class="row">
+            <p>Não possui usuário? <a href="#">Crie sua Conta</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
