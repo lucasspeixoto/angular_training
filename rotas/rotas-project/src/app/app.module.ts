@@ -12,7 +12,9 @@ import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AuthService } from './login/auth.service';
-
+import { AuthGuard } from './guards/auth.guard';
+import { CursosGuard } from './guards/cursos.guard';
+import { AlunosGuard } from './guards/alunos.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +29,12 @@ import { AuthService } from './login/auth.service';
     //AlunosModule, Deletando o import pois usaremos lazy loading
     AppRoutingModule
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    AuthGuard,
+    CursosGuard,
+    AlunosGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
