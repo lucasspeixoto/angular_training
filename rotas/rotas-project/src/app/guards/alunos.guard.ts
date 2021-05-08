@@ -23,9 +23,10 @@ export class AlunosGuard implements CanActivateChild {
     console.log(route)
     console.log(state)
     if (state.url.includes('editar')) {
-      this.router.navigate(['/alunos'])
-      alert('Você não pode editar as notas')
-      return false
+      //this.router.navigate(['/alunos'])
+      //alert('Você não pode editar as notas')
+      //return false
+
     }
 
     return true;

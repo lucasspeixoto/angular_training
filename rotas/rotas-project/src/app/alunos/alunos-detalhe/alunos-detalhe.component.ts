@@ -36,7 +36,6 @@ export class AlunosDetalheComponent implements OnInit {
           //Redireciona a rota
           this.aluno = {}
           this.router.navigate(['/alunos/naoEncontrado'])
-
         }
       }
     )

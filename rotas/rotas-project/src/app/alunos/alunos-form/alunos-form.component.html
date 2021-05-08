@@ -8,7 +8,7 @@
     </div><br><br>
     <div class="col-sm-10">
       <label class="active">Nome</label>
-      <input type="text" [(ngModel)]="aluno.nome" placeholder="Nome">
+      <input type="text" [(ngModel)]="aluno.nome" placeholder="Nome" (input)="onInput()">
     </div><br><br>
     <div class="col-sm-10">
       <label class="active">Email</label>
