@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { OperacaoService } from './operacao.service';
 
 @Component({
@@ -11,20 +11,21 @@ export class CalculadoraComponent implements OnInit {
   x: number = 0
   y: number = 0
   resultado!: number | 0
-  @ViewChild('selectInput') selectedOpe!: HTMLElement
+  selectedOption!: string
+
+  @ViewChild("selectInput", { static: false }) selectInput!: ElementRef;
 
   constructor(
     private operacaoService: OperacaoService
   ) { }
 
   ngOnInit(): void {
-    console.log(this.selectedOpe)
   }
 
-  operacao(input: string) {
-    console.log(this.selectedOpe)
+  onOperacao() {
     //Somar
-    this.resultado = this.operacaoService.operacao(this.x, this.y, input)
+    //console.log(this.selectInput.nativeElement.value)
+    this.resultado = this.operacaoService.operacao(this.x, this.y, this.selectInput.nativeElement.value)
   }
 
 }

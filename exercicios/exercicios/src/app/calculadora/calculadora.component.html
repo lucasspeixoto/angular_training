@@ -1,7 +1,8 @@
 <h1>Calculadora</h1><br>
 <h2>Operações</h2>
 <select #selectInput class="mdb-select md-form colorful-select dropdown-primary"
-  (change)="operacao(selectInput.value)">
+  (change)="onOperacao()"
+  [(ngModel)]="selectedOption">
   <option value="1">Soma</option>
   <option value="2">Subtração</option>
   <option value="3">Multiplicação</option>
@@ -10,10 +11,9 @@
 <h2 style="color: #080;">Resultado</h2>
 <div>
   <label>Valor 1:</label>
-  <input type="number" [(ngModel)]="x" (change)="operacao(selectInput.value)">
+  <input type="number" [(ngModel)]="x" (change)="onOperacao()">
   <label>Valor 2:</label>
-  <input type="number" [(ngModel)]="y" (change)="operacao(selectInput.value)">
+  <input type="number" [(ngModel)]="y" (change)="onOperacao()">
   <br><br>
   <h4>Resultado: {{resultado | number:'1.1-1'}}</h4>
 </div>
-
