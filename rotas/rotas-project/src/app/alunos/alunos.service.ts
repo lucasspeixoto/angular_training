@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { Aluno } from './aluno'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlunosService {
 
-  alunos: any[] = [
+  alunos: Aluno[] = [
     { id: 1, nome: 'Aluno A', email: 'alunoA@email.com' },
     { id: 2, nome: 'Aluno B', email: 'alunoB@email.com' },
     { id: 3, nome: 'Aluno C', email: 'alunoC@email.com' },
@@ -21,4 +22,5 @@ export class AlunosService {
   getAluno(_id: number) {
     return this.getAlunos().find(aluno => aluno.id == _id) || null
   }
+
 }
