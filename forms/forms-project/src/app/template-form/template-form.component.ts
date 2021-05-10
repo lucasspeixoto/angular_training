@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-template-form',
@@ -9,16 +9,33 @@ export class TemplateFormComponent implements OnInit {
 
   @ViewChild('f') valorInputForm!: HTMLElement
 
-  constructor() { }
+  usuario: any = {
+    nome: null,
+    email: null,
+    cep: null,
+    numero: null,
+    complemento: null,
+    rua: null,
+    bairro: null,
+    cidade: null,
+    estado: null
+  }
+
+  constructor(
+    //private cdref: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void {
+
   }
+
+  /* ngAfterContentChecked() {
+    this.cdref.detectChanges();
+  } */
 
   //Acessando com a variável f
   onSubmit(form: any) {
     console.log(form)
-    console.log(form.value.nome)
-    console.log(form.value.email)
   }
 
   //Acessando com ViewChild
