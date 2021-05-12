@@ -63,7 +63,11 @@ export class TemplateFormComponent implements OnInit {
             //data => console.log(data)
             data => this.setForm(data, forms)
           )
-      }
+      } else {
+        //cep é inválido.
+        this.resetForm(forms)
+        alert("Formato de CEP inválido.");
+    }
     }
   }
 
@@ -117,6 +121,10 @@ export class TemplateFormComponent implements OnInit {
   //Acessando com a variável f
   onSubmit(form: any) {
     console.log(form)
+    this.http.post('https://httpbin.org/post', JSON.stringify(form.value))
+      .subscribe(
+        data => console.log(data)
+         )
   }
 
   //Acessando com ViewChild
