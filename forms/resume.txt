@@ -1,0 +1,14 @@
+Template Driven
+
+ -> Formulário é criado e configurado no HTML
+ -> Validações são feitas no template HTML
+ -> Angular cria/deduz um formGroup do cod HTML
+ -> Valores do form são submetidos com ngSubmit
+
+Data Driven (Reativo)
+
+ -> Formulário é criado e configurado no Componente
+ -> Validações são feitas no componente
+ -> Angular usa o FormGroup criado no componente
+ -> Form ja está no Component e não precisa do ngSubmit.
+
