@@ -1,1 +1,31 @@
-<h1>Data Driven Form</h1>
+<form class="form-horizontal" [formGroup]="formulario" (ngSubmit)="onSubmit()">
+  <!-- Nome e Email -->
+  <div class="form-group row" [ngClass]="aplicaCssErro('nome')">
+    <!-- Nome -->
+    <div class="col-sm-12" >
+      <label class="control-label" for="nome">Nome</label>
+    </div>
+    <div class="col-sm-12" >
+      <input type="text" class="form-control" formControlName="nome" id="nome" placeholder="Nome">
+      <app-campo-control-erro [mostrarErro]="verificaValidTouched('nome')" [msgErro]="'O Nome é obrigatório'">
+      </app-campo-control-erro><br>
+    </div>
+  </div>
+
+  <div class="form-group row" [ngClass]="aplicaCssErro('email')">
+    <!-- E-mail -->
+    <div class="col-sm-12">
+      <label for="email" class="control-label">E-mail</label>
+    </div>
+    <div class="col-sm-12">
+      <input type="email" class="form-control" formControlName="email" required id="email" placeholder="nome@email.com">
+      <app-campo-control-erro [mostrarErro]="verificaValidTouched('email')" [msgErro]="'E-mail Inválido'">
+      </app-campo-control-erro><br>
+    </div>
+  </div>
+
+  <br>
+  <button type="submit" class="btn btn-dark">Submit</button>
+  <button class="btn btn-danger" (click)="resetar()">Cancelar</button>
+  <app-form-debug [form]="formulario"></app-form-debug>
+</form>
