@@ -1,6 +1,9 @@
-import { ConsultaCepService } from './../shared/services/consulta-cep.service';
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+
 import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators'
+import { Form } from '@angular/forms';
+import { formatCurrency, getLocaleDayPeriods } from '@angular/common';
 @Component({
   selector: 'app-template-form',
   templateUrl: './template-form.component.html',
@@ -24,8 +27,7 @@ export class TemplateFormComponent implements OnInit {
 
   constructor(
     //private cdref: ChangeDetectorRef
-    private http: HttpClient,
-    private cepService: ConsultaCepService
+    private http: HttpClient
   ) { }
 
   ngOnInit(): void {
@@ -45,15 +47,6 @@ export class TemplateFormComponent implements OnInit {
   }
 
   consultaCEP(cep: string, forms: any) {
-    cep = cep.replace(/\D/g, '')
-
-    if (cep != null && cep !== '') {
-      this.cepService.consultaCEP(cep)
-        .subscribe(dados => this.setForm(dados, forms));
-    }
-  }
-
-  /* consultaCEP(cep: string, forms: any) {
     cep = cep.replace(/\D/g, '')
     //Verifica se campo cep possui valor informado.
     if (cep != "") {
@@ -76,7 +69,7 @@ export class TemplateFormComponent implements OnInit {
         alert("Formato de CEP inválido.");
     }
     }
-  } */
+  }
 
   setForm(data: any, forms: any) {
 
@@ -127,6 +120,7 @@ export class TemplateFormComponent implements OnInit {
 
   //Acessando com a variável f
   onSubmit(form: any) {
+    console.log(form)
     this.http.post('https://httpbin.org/post', JSON.stringify(form.value))
       .subscribe(
         data => console.log(data)

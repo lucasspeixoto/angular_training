@@ -1,0 +1,111 @@
+<form #f="ngForm" (ngSubmit)="onSubmit(f)" class="form-horizontal">
+  <!-- Nome e Email -->
+  <div class="form-group row">
+    <!-- Nome -->
+    <div class="col-sm-12" [ngClass]="aplicaCssErro(nome)">
+      <label class="control-label" for="nome">Nome</label>
+    </div>
+    <div class="col sm-12">
+      <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome" [(ngModel)]="usuario.nome"
+        [ngModelOptions]="{standalone: false}" required #nome="ngModel"
+        [class.is-invalid]="!nome.valid && nome.touched">
+      <app-campo-control-erro [mostrarErro]="verificaValidTouched(nome)" [msgErro]="'O Nome é obrigatório'">
+      </app-campo-control-erro><br>
+    </div>
+    <!--  <div>
+      {{nome.className}}
+    </div> -->
+    <!-- Aqui, se for necessário apenas iniciar o valor, sem alterar no template, pode utilizar
+    o property binding: [ngModel]="usuario.nome"  -->
+
+    <!-- E-mail -->
+    <div class="col-sm-12" [ngClass]="aplicaCssErro(email)">
+      <label for="email" class="control-label">E-mail</label>
+    </div>
+    <div class="col-sm-12">
+      <input type="email" class="form-control" name="email" id="email" placeholder="nome@email.com"
+        [(ngModel)]="usuario.email" [ngModelOptions]="{standalone: false}" required email #email="ngModel"
+        [class.is-invalid]="!email.valid && email.touched">
+      <app-campo-control-erro [mostrarErro]="verificaValidTouched(email)" [msgErro]="'E-mail Inválido'">
+      </app-campo-control-erro><br>
+    </div>
+  </div>
+
+  <!-- CEP, Número e Complemento -->
+  <div ngModelGroup="endereco">
+    <div class="form-group row">
+      <!-- CEP -->
+      <div class="col-md-3" [ngClass]="aplicaCssErro(cep)">
+        <label for="cep" class="control-label">CEP</label>
+        <input type="cep" class="form-control" name="cep" id="cep" placeholder="01310100" [(ngModel)]="usuario.cep"
+          [ngModelOptions]="{standalone: false}" required #cep="ngModel" [class.is-invalid]="!cep.valid && cep.touched"
+          (blur)="consultaCEP(cep.value, f)">
+        <app-campo-control-erro [mostrarErro]="verificaValidTouched(cep)" [msgErro]="'CEP é obrigatório'">
+        </app-campo-control-erro><br>
+      </div>
+      <!-- Número -->
+      <div class="col-md-3" [ngClass]="aplicaCssErro(numero)">
+        <label for="numero" class="control-label">Número</label>
+        <input type="numero" class="form-control" name="numero" id="numero" placeholder="100"
+          [(ngModel)]="usuario.numero" [ngModelOptions]="{standalone: false}" required #numero="ngModel"
+          [class.is-invalid]="!numero.valid && numero.touched">
+        <app-campo-control-erro [mostrarErro]="verificaValidTouched(numero)" [msgErro]="'Número é obrigatório'">
+        </app-campo-control-erro><br>
+      </div>
+      <!-- Complemento -->
+      <div class="col-md-6">
+        <label for="complemento" class="control-label">Complemento</label>
+        <input type="complemento" class="form-control" name="complemento" id="complemento" placeholder=""
+          [(ngModel)]="usuario.complemento" [ngModelOptions]="{standalone: false}" #complemento="ngModel">
+      </div><br>
+    </div>
+
+    <!-- Rua -->
+
+    <div class="form-group row">
+      <div class="col-md-12" [ngClass]="aplicaCssErro(rua)">
+        <label for="rua" class="control-label">Rua</label>
+        <input type="rua" class="form-control" name="rua" id="rua" placeholder="Avenida Paulista"
+          ngModel [ngModelOptions]="{standalone: false}" required #rua="ngModel"
+          [class.is-invalid]="!rua.valid && rua.touched">
+        <app-campo-control-erro [mostrarErro]="verificaValidTouched(rua)" [msgErro]="'Rua é obrigatório'">
+        </app-campo-control-erro><br>
+      </div>
+    </div>
+
+
+    <!-- Bairro, Cidade e Estado -->
+    <div class="form-group row">
+      <!-- Bairro -->
+      <div class="col-md-6" [ngClass]="aplicaCssErro(bairro)">
+        <label for="bairro" class="control-label">Bairro</label>
+        <input type="bairro" class="form-control" name="bairro" id="bairro" placeholder="Bela Vista"
+          [(ngModel)]="usuario.bairro" [ngModelOptions]="{standalone: false}" required #bairro="ngModel"
+          [class.is-invalid]="!bairro.valid && bairro.touched">
+        <app-campo-control-erro [mostrarErro]="verificaValidTouched(bairro)" [msgErro]="'Bairro é obrigatório'">
+        </app-campo-control-erro><br>
+      </div>
+      <!-- Cidade -->
+      <div class="col-md-5" [ngClass]="aplicaCssErro(cidade)">
+        <label for="cidade" class="control-label">Cidade</label>
+        <input type="cidade" class="form-control" name="cidade" id="cidade" placeholder="São Paulo"
+          [(ngModel)]="usuario.cidade" [ngModelOptions]="{standalone: false}" required #cidade="ngModel"
+          [class.is-invalid]="!cidade.valid && cidade.touched">
+        <app-campo-control-erro [mostrarErro]="verificaValidTouched(cidade)" [msgErro]="'Cidade é obrigatório'">
+        </app-campo-control-erro><br>
+      </div>
+      <!-- Estado -->
+      <div class="col-md-1" [ngClass]="aplicaCssErro(estado)">
+        <label for="estado" class="control-label">Estado</label>
+        <input type="estado" class="form-control" name="estado" id="estado" placeholder="SP"
+          [(ngModel)]="usuario.estado" [ngModelOptions]="{standalone: false}" required #estado="ngModel"
+          [class.is-invalid]="!estado.valid && estado.touched">
+        <app-campo-control-erro [mostrarErro]="verificaValidTouched(estado)" [msgErro]="'Estado é obrigatório'">
+        </app-campo-control-erro><br>
+      </div>
+    </div>
+  </div>
+  <br>
+  <button type="submit" class="btn btn-dark" [disabled]="f.invalid">Submit</button>
+  <app-form-debug [form]="f"></app-form-debug>
+</form>
