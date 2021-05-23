@@ -1,1 +1,37 @@
-<p>courses-list works!</p>
+<br>
+<div class="card mt-3">
+  <div class="card-header">
+    <div class="float-left" style="float:left">
+      <h4>Courses</h4>
+    </div>
+    <div class="float-right" style="float:right">
+      <button type="button" class="btn btn-primary" routerLink="new">Add Course</button>
+    </div>
+  </div>
+  <div class="card-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Courses</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let course of courses">
+          <th>{{ course.id}}</th>
+          <th>{{ course.name}}</th>
+          <span class="float-right" style="float:right">
+            <button class="btn btn-outline-warning mb-1 btn-sm">
+              Refresh
+            </button>
+            {{ ' ' }}
+            <button class="btn btn-outline-danger mb-1 btn-sm">
+              Delete
+            </button>
+          </span>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
