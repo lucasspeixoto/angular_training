@@ -16,9 +16,27 @@ export class DropdownService {
 
   getCargos() {
     return [
-      {nome: 'Dev', nivel: 'Junior', desc: 'Dev Jr'},
-      {nome: 'Dev', nivel: 'Pleno', desc: 'Dev Pl'},
-      {nome: 'Dev', nivel: 'Sênior', desc: 'Dev Sr'}
+      { nome: 'Dev', nivel: 'Junior', desc: 'Dev Jr' },
+      { nome: 'Dev', nivel: 'Pleno', desc: 'Dev Pl' },
+      { nome: 'Dev', nivel: 'Sênior', desc: 'Dev Sr' }
+    ]
+  }
+
+  getTecs() {
+    return [
+      { nome: 'angular', desc: 'Angular' },
+      { nome: 'java', desc: 'Java' },
+      { nome: 'javascript', desc: 'JavaScript' },
+      { nome: 'php', desc: 'Php' },
+      { nome: 'python', desc: 'Python' },
+      { nome: 'django', desc: 'Django' }
+    ]
+  }
+
+  getNewsletter() {
+    return [
+      { valor: 's', desc: 'Sim' },
+      { valor: 'n', desc: 'Não' }
     ]
   }
 

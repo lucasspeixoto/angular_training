@@ -1,10 +1,13 @@
+import { VerificaEmailService } from './services/verifica-email.service';
+import { FormValidations } from './../shared/form-validations';
 import { ConsultaCepService } from './../shared/services/consulta-cep.service';
 import { EstadoBr } from './../shared/models/estado-br.model';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ControlContainer, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DropdownService } from '../shared/services/dropdown.service';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
+import { distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-data-form',
@@ -13,21 +16,29 @@ import { Observable } from 'rxjs';
 })
 export class DataFormComponent implements OnInit {
 
-  formulario!: FormGroup
+  formulario: FormGroup
   //estados: EstadoBr[]
   estados: Observable<EstadoBr[]>
   cargos: any[]
+  tecs: any[]
+  newsletterOp: any[]
+  frameworks = ['Angular', 'Next Js', 'React JS', 'Vue', 'Sencha']
 
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private dropdownService: DropdownService,
-    private cepService: ConsultaCepService
-  ) { }
+    private cepService: ConsultaCepService,
+    private verificaEmailService: VerificaEmailService
+  ) {
+
+  }
 
   ngOnInit(): void {
 
-    this.estados = this.dropdownService.getEstadosBr()
+    //A requisição só ocorre de colocarmos o subscribe
+    //this.verificaEmailService.verificarEmail('email@email.com').subscribe()
+
     //Com o pipe async na nossa tag option, o subscrible e unsubscrible vai ser feito automaticamente.
 
     /* sem o pipe async
@@ -35,9 +46,11 @@ export class DataFormComponent implements OnInit {
       .subscribe(ufs => { this.estados = ufs; console.log(ufs) }
       ) */
 
+    this.estados = this.dropdownService.getEstadosBr()
     this.cargos = this.dropdownService.getCargos()
+    this.tecs = this.dropdownService.getTecs()
+    this.newsletterOp = this.dropdownService.getNewsletter()
 
-    console.log(this.estados)
 
     /* this.formulario = new FormGroup({
       nome: new FormControl(''),
@@ -45,25 +58,46 @@ export class DataFormComponent implements OnInit {
     }) */
 
     this.formulario = this.formBuilder.group({
-      nome: ['', [Validators.required, Validators.minLength(3)]],
-      email: ['', [Validators.required, Validators.email]],
+      nome: [null, [Validators.required, Validators.minLength(3)]],
+      email: [null, [Validators.required, Validators.email], [this.validarEmail.bind(this)]], //Inserir o bind ou passar o serviço como parâmetro
+      confirmarEmail: [null, [FormValidations.equalsTo('email')]],
 
       endereco: this.formBuilder.group({
-        cep: ['', Validators.required],
-        numero: ['', Validators.required],
-        complemento: [''],
-        rua: ['', Validators.required],
-        bairro: ['', Validators.required],
-        cidade: ['', Validators.required],
-        estado: ['', Validators.required],
+        cep: [null, [Validators.required, FormValidations.cepValidator]],
+        numero: [null, Validators.required],
+        complemento: [null],
+        rua: [null, Validators.required],
+        bairro: [null, Validators.required],
+        cidade: [null, Validators.required],
+        estado: [null, Validators.required],
       }),
 
-      cargo: [null]
+      cargo: [null],
+      tecs: [null],
+      newsletter: ['s'],
+      termos: [null, Validators.pattern('true')], //pattern valida um expressão regular
+      frameworks: this.buildFrameworks()
 
     })
+
+    this.formulario.get('endereco.cep')?.statusChanges
+      .pipe(
+        distinctUntilChanged(),
+        tap(value => console.log('status CEP:', value)),
+        switchMap(status => status === 'VALID' ?
+          this.cepService.consultaCEP(this.formulario.get('endereco.cep')?.value)
+          : EMPTY
+        )
+      )
+      .subscribe(dados => dados ? this.setForm(dados) : {});
+
+
   }
 
-
+  buildFrameworks() {
+    const values = this.frameworks.map(v => new FormControl(false))
+    return this.formBuilder.array(values)//FormValidations.requiredMinCheckbox(1))
+  }
 
   resetar() {
     this.resetForm()
@@ -72,8 +106,15 @@ export class DataFormComponent implements OnInit {
 
   onSubmit() {
 
+    let valueSubmit = Object.assign({}, this.formulario.value)
+    valueSubmit = Object.assign(valueSubmit, {
+      frameworks: valueSubmit.frameworks
+        .map((v: any, i: any) => v ? this.frameworks[i] : null)
+        .filter((v: any) => v !== null)
+    })
+    console.log(valueSubmit);
     if (this.formulario.valid) {
-      this.http.post('https://httpbin.org/post', JSON.stringify({}))
+      this.http.post('https://httpbin.org/post', JSON.stringify(valueSubmit))
         .subscribe(
           _ => {
             //Resetar form
@@ -84,7 +125,6 @@ export class DataFormComponent implements OnInit {
 
     } else {
       this.verificaValidacoesForm(this.formulario)
-
     }
 
   }
@@ -97,13 +137,21 @@ export class DataFormComponent implements OnInit {
       if (control instanceof FormGroup) {
         this.verificaValidacoesForm(control)
       }
-
     })
   }
 
-  verificaValidTouched(campo: any) {
-    return !this.formulario.get(campo)?.valid &&
-      this.formulario.get(campo)?.touched
+  verificaValidTouched(campo: string) {
+    return (
+      !this.formulario.get(campo)?.valid &&
+      (this.formulario.get(campo)?.touched)
+    )
+  }
+
+  verificaRequired(campo: string) {
+    return (
+      this.formulario.get(campo)?.hasError('required') &&
+      (this.formulario.get(campo)?.touched)
+    )
   }
 
   verificaEmailInvalido() {
@@ -185,14 +233,28 @@ export class DataFormComponent implements OnInit {
   }
 
   setarCargo() {
-    const cargo = {nome: 'Dev', nivel: 'Pleno', desc: 'Dev Pl'}
+    const cargo = { nome: 'Dev', nivel: 'Pleno', desc: 'Dev Pl' }
     this.formulario.get('cargo')?.setValue(cargo)
   }
 
   compararCargos(obj1: any, obj2: any) {
     return obj1 && obj2 ?
-    (obj1.nome === obj2.nome && obj1.nivel === obj2.nivel)
-    : obj1 === obj2
+      (obj1.nome === obj2.nome && obj1.nivel === obj2.nivel)
+      : obj1 === obj2
+  }
+
+  setarTecs() {
+    this.formulario.get('tecs')?.setValue(['python', 'django'])
+  }
+
+  getFrameworksControls() {
+    return this.formulario.get('frameworks') ?
+      (<FormArray>this.formulario.get('frameworks')).controls : null;
+  }
+
+  validarEmail(formControl: FormControl) {
+    return this.verificaEmailService.verificarEmail(formControl.value)
+      .pipe(map(emailExiste => emailExiste ? { emailInvalido: true } : null))
   }
 
   /* Se nossa variável a ser exibida nas options de uma select
