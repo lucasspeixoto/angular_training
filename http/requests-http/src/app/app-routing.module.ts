@@ -9,6 +9,10 @@ const AppRoutes: Routes = [
   {
     path: 'courses',
     loadChildren: () => import('./courses/courses.module').then(m => m.CoursesModule)
+  },
+  {
+    path: 'rxjs-poc',
+    loadChildren: () => import('./unsubscribe-rxjs/unsubscribe-rxjs.module').then(m => m.UnsubscribeRxjsModule)
   }
 ];
 

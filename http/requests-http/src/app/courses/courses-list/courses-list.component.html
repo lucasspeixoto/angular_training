@@ -9,7 +9,9 @@
     </div>
   </div>
   <div class="card-body">
-    <table class="table table-hover">
+    <!-- <div class="spinner-grow text-primary" *ngIf="courses$"></div> -->
+    <table class="table" *ngIf="courses$ | async as courses; else loading">
+      <!-- ao carregar a table, a variável local 'courses' vai receber o courses$, ficando disponível em todo template -->
       <thead>
         <tr>
           <th>#</th>
@@ -33,5 +35,10 @@
         </tr>
       </tbody>
     </table>
+
+    <ng-template #loading>
+      <div class="spinner-border text-primary"></div>
+    </ng-template>
+
   </div>
 </div>
