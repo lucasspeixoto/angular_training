@@ -6,11 +6,13 @@
     </div>
     <div class="float-right" style="float:right">
       <button type="button" class="btn btn-primary" routerLink="new">Add Course</button>
+      {{ ' ' }}
+      <button type="button" class="btn btn-dark" (click)="onRefresh()">Refresh</button>
     </div>
   </div>
   <div class="card-body">
     <!-- <div class="spinner-grow text-primary" *ngIf="courses$"></div> -->
-    <table class="table" *ngIf="courses$ | async as courses; else loading">
+    <table class="table" *ngIf="courses$ | async as courses; else loadingError">
       <!-- ao carregar a table, a variável local 'courses' vai receber o courses$, ficando disponível em todo template -->
       <thead>
         <tr>
@@ -36,8 +38,13 @@
       </tbody>
     </table>
 
-    <ng-template #loading>
-      <div class="spinner-border text-primary"></div>
+    <ng-template #loadingError>
+      <div *ngIf="error$ | async; else loading">
+        Erro ao carregar cursos. Tente novamente
+      </div>
+      <ng-template #loading>
+        <div class="spinner-border text-primary"></div>
+      </ng-template>
     </ng-template>
 
   </div>
