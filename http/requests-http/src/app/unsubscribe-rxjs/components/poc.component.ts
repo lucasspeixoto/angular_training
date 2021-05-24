@@ -23,6 +23,8 @@ export class PocComponent implements OnInit, OnDestroy {
       .subscribe((novoValor: any) => this.valor = novoValor);
   }
 
+  /* Mesmo após a destruição do componente, ele continua inscrito no
+  observable, o que pode causar problemas de lentidão no app. */
   ngOnDestroy() {
     console.log(`${this.nome} foi destruido`);
   }

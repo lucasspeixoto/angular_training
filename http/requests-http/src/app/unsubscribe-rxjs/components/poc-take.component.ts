@@ -17,6 +17,8 @@ export class PocTakeComponent implements OnInit, OnDestroy {
 
   constructor(private service: SendValueService) {}
 
+  /* Requisições http simples, onde apenas queremos obter dados do servidor,
+  ou seja, em chamadas http onde o backend não é reativo */
   ngOnInit() {
     this.service.getValor()
       .pipe(

@@ -21,6 +21,8 @@ export class PocTakeUntilComponent implements OnInit, OnDestroy {
 
   constructor(private service: SendValueService) {}
 
+  /* takeUntil é uma forma elegante para retirar a inscrição quando queremos
+  que a inscrição permaneça por todo o ciclo de vida do componente */
   ngOnInit() {
     this.service.getValor()
       .pipe(

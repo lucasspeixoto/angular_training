@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 })
 export class SendValueService {
 
-  private emissor$ = new Subject<string>();
+  private emissor$ = new Subject<string>(); //Criação de um observable
 
   emitirValor(valor: string) {
     this.emissor$.next(valor);

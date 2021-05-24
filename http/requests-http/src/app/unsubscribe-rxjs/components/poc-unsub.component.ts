@@ -21,6 +21,9 @@ export class PocUnsubComponent implements OnInit, OnDestroy {
 
   constructor(private service: SendValueService) { }
 
+  /* Essa forma de retirar a inscrição em um observable, com o Subscription,
+  é uma forma imperativa, não estamos usando o poder do rxjs com programação
+  reativa */
   ngOnInit() {
     this.sub.push(this.service.getValor()
       .pipe(tap(v => console.log(this.nome, v)))
