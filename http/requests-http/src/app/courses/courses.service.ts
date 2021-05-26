@@ -19,7 +19,7 @@ export class CoursesService {
   list() {
     return this.http.get<Course[]>(this.API)
     .pipe(
-      delay(1000),
+      delay(10),
       tap(console.log)
     )
   }

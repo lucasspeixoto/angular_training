@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { CursosService } from './../services/cursos.service';
+import { CursosService } from '../services/cursos.service'
+
 @Component({
   selector: 'app-pai',
   templateUrl: './pai.component.html',
@@ -18,12 +19,12 @@ export class PaiComponent implements OnInit {
     this.cursos = this.cursosService.getCursos()
   }
 
-  onAddCurso(curso: string) {
-    this.cursosService.AddCursos(curso)
+  onAddCurso(curso: string){
+    this.cursosService.AddCurso(curso)
   }
 
-  adicionouNoFilho(event: any) {
-    console.log(`Mensgem do Filho: ${event}`)
+  AdicionouNofilho(event: any){
+    console.log(`Mensagem do Filho: ${event}`)
   }
 
 }

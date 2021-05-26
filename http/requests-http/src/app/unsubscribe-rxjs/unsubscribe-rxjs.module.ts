@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { UnsubscribeRxjsRoutingModule } from './unsubscribe-rxjs-routing.module';
-
-
 import { UnsubscribePocComponent } from './unsubscribe-poc/unsubscribe-poc.component';
 import { PocComponent } from './components/poc.component';
 import { PocAsyncComponent } from './components/poc-async.component';

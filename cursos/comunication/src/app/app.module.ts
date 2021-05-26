@@ -7,7 +7,6 @@ import { PaiComponent } from './pai/pai.component';
 import { FilhoComponent } from './filho/filho.component';
 import { IndependenteComponent } from './independente/independente.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
