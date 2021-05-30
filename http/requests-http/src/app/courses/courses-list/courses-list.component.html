@@ -5,14 +5,33 @@
       <h4>Courses</h4>
     </div>
     <div class="float-right" style="float:right">
-      <button type="button" class="btn btn-primary" routerLink="new">Add Course</button>
+      <!-- <button type="button" class="btn btn-primary" (click)="create(crudForm)">Add Course</button>
       {{ ' ' }}
+      <ng-template #crudForm>
+         <div class="modal-header">
+          <h4 class="modal-title pull-left">Course Name</h4>
+          <button type="button" class="close pull-right btn-danger" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <app-courses-form [modalRef]="modalRef"></app-courses-form>
+      </ng-template> -->
+      
+      <button type="button" class="btn btn-primary" (click)="open(crudForm)">Add Course</button>
+
+      <ng-template #crudForm >
+          <app-courses-form></app-courses-form>
+      </ng-template>
+      
+      {{ ' ' }}
+      <!-- <button type="button" class="btn btn-primary" routerLink="new">Add Course</button>
+      {{ ' ' }} -->
       <button type="button" class="btn btn-dark" (click)="onRefresh()">Refresh</button>
     </div>
   </div>
   <div class="card-body">
     <!-- <div class="spinner-grow text-primary" *ngIf="courses$"></div> -->
-    <table class="table" *ngIf="courses$ | async as courses; else loadingError">
+    <table class="table" *ngIf="courses$ | async as courses; else loading">
       <!-- ao carregar a table, a variável local 'courses' vai receber o courses$, ficando disponível em todo template -->
       <thead>
         <tr>
@@ -26,8 +45,8 @@
           <th>{{ course.id}}</th>
           <th>{{ course.name}}</th>
           <span class="float-right" style="float:right">
-            <button class="btn btn-outline-warning mb-1 btn-sm">
-              Refresh
+            <button class="btn btn-outline-warning mb-1 btn-sm" (click)="onEdit(course.id)">
+              Edit
             </button>
             {{ ' ' }}
             <button class="btn btn-outline-danger mb-1 btn-sm">
@@ -37,15 +56,20 @@
         </tr>
       </tbody>
     </table>
-
-    <ng-template #loadingError>
+    <ng-template #loading>
+      <div *ngIf="loadspinner">
+        <div class="spinner-border text-primary"></div>
+      </div>
+    </ng-template>
+    <!-- <ng-template #loadingError>
       <div *ngIf="error$ | async; else loading">
         Erro ao carregar cursos. Tente novamente
       </div>
       <ng-template #loading>
-        <div class="spinner-border text-primary"></div>
+        <div *ngIf="loadspinner">
+          <div class="spinner-border text-primary"></div>
+        </div>
       </ng-template>
-    </ng-template>
-
+    </ng-template> -->
   </div>
 </div>

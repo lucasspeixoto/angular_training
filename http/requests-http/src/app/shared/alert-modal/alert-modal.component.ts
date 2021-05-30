@@ -1,7 +1,7 @@
-
 import { Component, Input, OnInit } from '@angular/core';
 
 import { BsModalRef } from 'ngx-bootstrap/modal';
+
 
 @Component({
   selector: 'app-alert-modal',
@@ -9,18 +9,17 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
   styleUrls: ['./alert-modal.component.scss'],
 })
 export class AlertModalComponent implements OnInit {
-
   @Input() type: 'success';
   @Input() message: string;
 
-  constructor(
-    public bsModalRef: BsModalRef
-  ) { }
+  constructor(public bsModalRef: BsModalRef) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onClose() {
-    this.bsModalRef.hide()
+    //Fechar modal
+    this.bsModalRef.hide();
   }
+
+  GetError(event: any) {}
 }

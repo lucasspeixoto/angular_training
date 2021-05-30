@@ -1,0 +1,7 @@
+<div *ngIf="form.controls.name.errors?.required">This Field is Required.</div>
+<div *ngIf="form.controls.name.errors?.minlength">
+  Name must be at least 3 characters long.
+</div>
+<div *ngIf="form.controls.name.errors?.maxlength">
+  Name must be at most 30 characters long.
+</div>
