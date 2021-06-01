@@ -7,6 +7,9 @@ import { CoursesFormComponent } from './courses-form/courses-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PrintErrorComponent } from './courses-form/print-error/print-error.component';
 import { CrudOperationComponent } from './crud-operation/crud-operation.component';
+import { AddCourseComponent } from './add-course/add-course.component';
+import { EditCourseComponent } from './edit-course/edit-course.component';
+import { DeleteCourseComponent } from './delete-course/delete-course.component';
 
 
 @NgModule({
@@ -14,7 +17,10 @@ import { CrudOperationComponent } from './crud-operation/crud-operation.componen
     CoursesListComponent,
     CoursesFormComponent,
     PrintErrorComponent,
-    CrudOperationComponent
+    CrudOperationComponent,
+    AddCourseComponent,
+    EditCourseComponent,
+    DeleteCourseComponent
   ],
   imports: [
     CommonModule,

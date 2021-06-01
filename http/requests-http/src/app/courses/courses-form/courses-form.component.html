@@ -1,43 +1,30 @@
-<div class="modal-header">
-  <h4 class="modal-title pull-left">Course Name</h4>
-  <button type="button" class="close pull-top btn-danger" aria-label="Close" (click)="backToCourses()">
-    <span aria-hidden="true">×</span>
-  </button>
-</div>
-<div>
-  <form class="row needs-validation" novalidate [formGroup]="form" style="padding: 10px">
-    <div class="col-sm-8">
-      <input type="text" class="form-control" id="name" placeholder="Course Name" formControlName="name"
-        [ngClass]="{ 'is-invalid': submitFlag && hasError('name') }" />
-      <!-- Sem o componente de erro
-          <div *ngIf="hasError('name')" class="invalid-feedback"> 
-          <div *ngIf="form.controls.name.errors?.required">
-              This Field is Required.
-          </div>
-          <div *ngIf="form.controls.name.errors?.minlength">
-              Name must be at least 3 characters long.
-          </div>
-          <div *ngIf="form.controls.name.errors?.maxlength">
-              Name must be at most 15 characters long.
-          </div>
-      </div> -->
-      <div *ngIf="hasError('name')" class="invalid-feedback">
-        <print-error [control]="form"></print-error>
-      </div>
+<form
+  class="row needs-validation"
+  novalidate
+  [formGroup]="form"
+  style="padding: 10px"
+>
+  <div class="col-sm-4">
+    <label for="nome" style="color: #0d6efd; font-size: 30px; font-weight: bold">Add Course</label>
+    <input
+      type="text"
+      class="form-control"
+      id="name"
+      placeholder="Course Name"
+      formControlName="name"
+      [ngClass]="{ 'is-invalid': submitFlag && hasError('name') }"
+    />
+    <div *ngIf="hasError('name')" class="invalid-feedback">
+      <print-error [control]="form"></print-error>
     </div>
-    <br><br>
-    <div style="padding-left: 10px">
-      <button type="submit" class="btn btn-primary" (click)="onSubmit()">
-        Save
-      </button>
-      {{ " " }}
-      <!-- <button type="button" class="btn btn-dark" (click)="onCancel()">
-        Cancel
-      </button>
-      {{ " " }} -->
-      <button type="button" class="btn btn-info" (click)="backToCourses()">
-        Back
-      </button>
-    </div>
-  </form>
-</div>
+  </div>
+  <div style="padding-top: 10px">
+    <button type="submit" class="btn btn-primary" (click)="onSubmit()">
+      Save
+    </button>
+    {{ " " }}
+    <button type="button" class="btn btn-danger" (click)="backToCourses()">
+      Cancel
+    </button>
+  </div>
+</form>

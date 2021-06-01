@@ -10,6 +10,8 @@ import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CrudOperationComponent } from '../crud-operation/crud-operation.component';
 import { CoursesFormComponent } from '../courses-form/courses-form.component';
+import { HttpParams } from '@angular/common/http';
+import { AddCourseComponent } from '../add-course/add-course.component';
 
 @Component({
   selector: 'app-courses-list',
@@ -44,7 +46,7 @@ export class CoursesListComponent implements OnInit {
 
   onRefresh() {
     this.loadspinner = true
-    this.courses$ = this.service.list()
+    this.courses$ = this.service.getCoursesList()
       .pipe(
         //delay(2000),
         catchError((error) => {
@@ -55,47 +57,33 @@ export class CoursesListComponent implements OnInit {
           return EMPTY;
         })
       );
-
-    //Caso use subscrible 1:
-    /*  this.service.list().subscribe(
-      data => {
-        console.log(data)
-      },
-      error => console.error(error),
-      () => console.log('Observable completo!')
-    )
- */
-    //Caso use subscrible 2
-    /* this.courses$ = this.service.list()
-      .pipe(
-        //map(),
-        //tap(),
-        //switchMap(),
-        catchError(error => {
-          console.error(error);
-          this.error$.next(true)
-          return EMPTY
-        })
-      ) */
   }
+
+  onAdd2(crudForm: any) {
+    this.modalRef = this.bsmodalservice.show(crudForm)
+  }
+
+  // Create course
+  onAdd() {
+    this.router.navigate(['courses/new'])
+    /* this.modalRef.content.event.subscribe(
+      (result: any) => {
+        console.log(result)
+        if (result == 'OK') {
+          this.onRefresh()
+        }
+      }
+    ) */
+  }
+
+  // Edit course
+  onEdit(id: any) {
+    this.router.navigate(['edit', id], { relativeTo: this.route })
+  }
+
 
   handleError() {
     this.alertModalService.showAlertDanger('Erro ao carregar, tente novamente mais tarde.')
   }
-
-  // Create course
-  create(crudForm: any) {
-    this.modalRef = this.bsmodalservice.show(crudForm)
-  }
-
-  onEdit(id: number) {
-    this.router.navigate(['edit', id], { relativeTo: this.route })
-  }
-
-  open(crudForm: any) {
-    this.modalRef = this.bsmodalservice.show(crudForm);
-  }
-
-
 
 }

@@ -22,7 +22,19 @@
     },
     {
       "id": 6,
+      "name": "Django"
+    },
+    {
+      "id": 7,
       "name": "Git e GitHub"
+    },
+    {
+      "id": 8,
+      "name": "Material"
+    },
+    {
+      "id": 9,
+      "name": "Teste"
     }
   ]
 }

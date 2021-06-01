@@ -36,10 +36,10 @@ export class AlertModalService {
     this.showAlert(message, AlertTypes.SUCCESS, 3000)
   }
   showAlertWarning(message: string) {
-    this.showAlert(message, AlertTypes.WARNING)
+    this.showAlert(message, AlertTypes.WARNING, 3000)
   }
 
   showAlertInfo(message: string) {
-    this.showAlert(message, AlertTypes.INFO)
+    this.showAlert(message, AlertTypes.INFO, 3000)
   }
 }

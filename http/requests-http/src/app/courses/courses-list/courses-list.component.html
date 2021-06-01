@@ -1,36 +1,30 @@
-<br>
+<br />
 <div class="card mt-3">
   <div class="card-header">
-    <div class="float-left" style="float:left">
+    <div class="float-left" style="float: left">
       <h4>Courses</h4>
     </div>
-    <div class="float-right" style="float:right">
-      <!-- <button type="button" class="btn btn-primary" (click)="create(crudForm)">Add Course</button>
-      {{ ' ' }}
-      <ng-template #crudForm>
-         <div class="modal-header">
-          <h4 class="modal-title pull-left">Course Name</h4>
-          <button type="button" class="close pull-right btn-danger" aria-label="Close" (click)="modalRef.hide()">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <app-courses-form [modalRef]="modalRef"></app-courses-form>
-      </ng-template> -->
-      
-      <button type="button" class="btn btn-primary" (click)="open(crudForm)">Add Course</button>
+    <div class="float-right" style="float: right">
 
-      <ng-template #crudForm >
-          <app-courses-form></app-courses-form>
+      <!-- Add -->
+      <button type="button" class="btn btn-primary" (click)="onAdd()">
+        Add Course
+      </button>
+      {{ " " }}
+      <!-- Modal Add -->
+      <button type="button" class="btn btn-info" (click)="onAdd2(crudForm)">
+        Add Course pop
+      </button>
+      <ng-template #crudForm>
+        <add-course></add-course>
       </ng-template>
-      
-      {{ ' ' }}
-      <!-- <button type="button" class="btn btn-primary" routerLink="new">Add Course</button>
-      {{ ' ' }} -->
-      <button type="button" class="btn btn-dark" (click)="onRefresh()">Refresh</button>
+      {{ " " }}
+      <button type="button" class="btn btn-dark" (click)="onRefresh()">
+        Refresh
+      </button>
     </div>
   </div>
   <div class="card-body">
-    <!-- <div class="spinner-grow text-primary" *ngIf="courses$"></div> -->
     <table class="table" *ngIf="courses$ | async as courses; else loading">
       <!-- ao carregar a table, a variável local 'courses' vai receber o courses$, ficando disponível em todo template -->
       <thead>
@@ -42,16 +36,14 @@
       </thead>
       <tbody>
         <tr *ngFor="let course of courses">
-          <th>{{ course.id}}</th>
-          <th>{{ course.name}}</th>
-          <span class="float-right" style="float:right">
-            <button class="btn btn-outline-warning mb-1 btn-sm" (click)="onEdit(course.id)">
-              Edit
-            </button>
-            {{ ' ' }}
-            <button class="btn btn-outline-danger mb-1 btn-sm">
-              Delete
-            </button>
+          <th>{{ course.id }}</th>
+          <th>{{ course.name }}</th>
+          <span class="float-right" style="float: right">
+            <!-- Edit -->
+            <button class="btn btn-outline-warning mb-1 btn-sm" (click)="onEdit(course.id)">Edit</button>
+            {{ " " }}
+            <!-- Delete -->
+            <button class="btn btn-outline-danger mb-1 btn-sm">Delete</button>
           </span>
         </tr>
       </tbody>
@@ -61,15 +53,5 @@
         <div class="spinner-border text-primary"></div>
       </div>
     </ng-template>
-    <!-- <ng-template #loadingError>
-      <div *ngIf="error$ | async; else loading">
-        Erro ao carregar cursos. Tente novamente
-      </div>
-      <ng-template #loading>
-        <div *ngIf="loadspinner">
-          <div class="spinner-border text-primary"></div>
-        </div>
-      </ng-template>
-    </ng-template> -->
   </div>
 </div>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { catchError, delay, map, take, tap } from 'rxjs/operators'
+import { catchError, map, take } from 'rxjs/operators'
 import { Course } from './courses-list/courses';
 import { environment } from './../../environments/environment';
 import { EMPTY, Observable } from 'rxjs';
@@ -21,32 +21,42 @@ export class CoursesService {
     private router: Router
   ) { }
 
-  list() {
-    console.log('list')
+  //Obter listagem de cursos
+  getCoursesList() {
     return this.http.get<Course[]>(this.API)
       .pipe(
-        delay(10),
-        tap(console.log)
+        map(obj => obj),
+        catchError(e => this.errorHandler(e))
       )
   }
 
+  //Obter id de curso selecionado
   loadByID(id: number) {
-    return this.http.get(`${this.API}/${id}`).pipe(take(1)) // .pipe(take(1)) vai no servidor uma única vez e volta
+    return this.http.get<Course[]>(`${this.API}/${id}`).pipe(take(1)) // .pipe(take(1)) vai no servidor uma única vez e volta
   }
 
-  /* Erro no servi;o 
+  //Criar curso enviando ao servidor
   create(course: string): Observable<Course> {
     return this.http.post<Course>(this.API, course).pipe(
       map(obj => obj),
       catchError(e => this.errorHandler(e))
-      )
-  } */
-  create(course: string): Observable<Course> {
-    return this.http.post<Course>(this.API, course)
-      .pipe(
-        take(1),
-        catchError(e => this.errorHandler(e))
-      )
+    )
+  }
+
+  //Atualizar curso enviando ao servidor
+  update(course: any) {
+    return this.http.put(`${this.API}/${course.id}`, course).pipe(
+      map(obj => obj),
+      catchError(e => this.errorHandler(e))
+    )
+  }
+
+  //Metodo para salvar curso (adição e edição)
+  save(course: any) {
+    if (course.id) {
+      return this.update(course)
+    } 
+    return this.create(course)
   }
 
   errorHandler(e: any): Observable<any> {
