@@ -3,7 +3,7 @@ import { Course } from './courses';
 
 import { CoursesService } from './../courses.service';
 import { EMPTY, Observable, Subject } from 'rxjs';
-import { catchError, delay } from 'rxjs/operators';
+import { catchError, delay, switchMap, take } from 'rxjs/operators';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AlertModalComponent } from 'src/app/shared/alert-modal/alert-modal.component';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
@@ -87,8 +87,23 @@ export class CoursesListComponent implements OnInit {
   // Delete course
   onDelete(course: Course) {
     this.selectedCourse = course //Como o ng-template esta fora do escopo de visualização do nosso html, não conseguimos passar o curso como parâmetro, é necessário a atribuição via componente
-    this.deleteModalRef = this.bsmodalservice.show(this.deleteModal, { class: 'modal-sm' })
+    //Sem o showConfirm
+    //this.deleteModalRef = this.bsmodalservice.show(this.deleteModal, { class: 'modal-sm' })
+    //this.alertModalService.showConfirm('Delete Course', 'Are you sure you want delete this course?', 'Yes', 'No')
+    const result$ = this.alertModalService.showConfirm('Delete Course', 'Are you sure you want delete this course?', 'Yes', 'No')
+    result$.asObservable()
+      .pipe(
+        take(1),
+        switchMap(
+          result => result ? this.coursesService.remove(course.id)
+            : EMPTY)
+      )
+      .subscribe(
+        success => this.onRefresh(),
+        error => this.alertModalService.showAlertDanger('Erro ao deletar curso, tente novamente mais tarde.')
+      )
   }
+
   OnConfirmDelete() {
     this.coursesService.remove(this.selectedCourse.id)
       .subscribe(
