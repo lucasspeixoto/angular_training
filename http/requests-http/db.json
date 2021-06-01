@@ -2,7 +2,7 @@
   "courses": [
     {
       "id": 1,
-      "name": "Angular"
+      "name": "Angular 11"
     },
     {
       "id": 2,
@@ -17,24 +17,8 @@
       "name": "Vue"
     },
     {
-      "name": "Python",
-      "id": 5
-    },
-    {
-      "id": 6,
-      "name": "Django"
-    },
-    {
-      "id": 7,
-      "name": "Git e GitHub"
-    },
-    {
-      "id": 8,
-      "name": "Material"
-    },
-    {
-      "id": 9,
-      "name": "Teste"
+      "id": 5,
+      "name": "Django Framework"
     }
   ]
 }

@@ -82,49 +82,44 @@ export class CoursesFormComponent implements OnInit {
     //console.log(this.form.value);
     //Caso formulário esteja válido
     if (this.form.valid) {
-
-
       let successMsg = 'Course add'
       let errorMsg = 'Error in create course'
       if (this.form.value.id) {
         successMsg = 'Course Update'
         errorMsg = 'Error in edit course'
       }
-
-
       this.coursesService.save(this.form.value)
-      .subscribe(
-        (success) => {
-          this.alertModalService.showAlertSuccess('Course update');
-            this.router.navigate(['courses']);
-        },
-        (error) => {
-          this.alertModalService.showAlertInfo(`Error`)
-        }
-      )
-
-     /*  //Caso exista id (update ou delete)
-      if (this.form.value.id) {
-        //update
-        this.coursesService.update(this.form.value).subscribe(
+        .subscribe(
           (success) => {
             this.alertModalService.showAlertSuccess('Course update');
             this.router.navigate(['courses']);
           },
-          (Error) => this.alertModalService.showAlertInfo(`Error`)
-        );
-      } else {
-        //Add
-        this.coursesService.create(this.form.value).subscribe(
-          (success) => {
-            this.alertModalService.showAlertSuccess('Course add');
-            this.router.navigate(['courses']);
-          },
-          (Error) => this.alertModalService.showAlertInfo(`Error`)
-        );
-      } */
-    }
+          (error) => {
+            this.alertModalService.showAlertInfo(`Error`)
+          }
+        )
 
+      /*  //Caso exista id (update ou delete)
+       if (this.form.value.id) {
+         //update
+         this.coursesService.update(this.form.value).subscribe(
+           (success) => {
+             this.alertModalService.showAlertSuccess('Course update');
+             this.router.navigate(['courses']);
+           },
+           (Error) => this.alertModalService.showAlertInfo(`Error`)
+         );
+       } else {
+         //Add
+         this.coursesService.create(this.form.value).subscribe(
+           (success) => {
+             this.alertModalService.showAlertSuccess('Course add');
+             this.router.navigate(['courses']);
+           },
+           (Error) => this.alertModalService.showAlertInfo(`Error`)
+         );
+       } */
+    }
   }
 
   onCancel() {

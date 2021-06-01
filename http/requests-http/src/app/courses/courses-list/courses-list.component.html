@@ -5,17 +5,16 @@
       <h4>Courses</h4>
     </div>
     <div class="float-right" style="float: right">
-
       <!-- Add -->
       <button type="button" class="btn btn-primary" (click)="onAdd()">
         Add Course
       </button>
       {{ " " }}
       <!-- Modal Add -->
-      <button type="button" class="btn btn-info" (click)="onAdd2(crudForm)">
+      <button type="button" class="btn btn-info" (click)="onAdd2(addForm)">
         Add Course pop
       </button>
-      <ng-template #crudForm>
+      <ng-template #addForm>
         <add-course></add-course>
       </ng-template>
       {{ " " }}
@@ -40,10 +39,31 @@
           <th>{{ course.name }}</th>
           <span class="float-right" style="float: right">
             <!-- Edit -->
-            <button class="btn btn-outline-warning mb-1 btn-sm" (click)="onEdit(course.id)">Edit</button>
+            <button
+              class="btn btn-outline-warning mb-1 btn-sm"
+              (click)="onEdit(course.id)"
+            >
+              Edit
+            </button>
             {{ " " }}
+            <!-- Edit -->
+            <button
+              class="btn btn-outline-warning mb-1 btn-sm"
+              (click)="onEdit2(editForm)"
+            >
+              Edit pop
+            </button>
+            {{ " " }}
+            <ng-template #editForm>
+              <edit-course [course]="course"></edit-course>
+            </ng-template>
             <!-- Delete -->
-            <button class="btn btn-outline-danger mb-1 btn-sm">Delete</button>
+            <button
+              class="btn btn-outline-danger mb-1 btn-sm"
+              (click)="onDelete(course)"
+            >
+              Delete
+            </button>
           </span>
         </tr>
       </tbody>
@@ -55,3 +75,11 @@
     </ng-template>
   </div>
 </div>
+
+<ng-template #deleteModal>
+  <div class="modal-body text-center">
+    <p>Are you sure you want to delete course?</p>
+    <button type="button" class="btn btn-default" (click)="OnConfirmDelete()" >Yes</button>
+    <button type="button" class="btn btn-primary" (click)="OnDeclineDelete()" >No</button>
+  </div>
+</ng-template>

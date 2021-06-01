@@ -36,7 +36,7 @@ export class CoursesService {
   }
 
   //Criar curso enviando ao servidor
-  create(course: string): Observable<Course> {
+  create(course: Course): Observable<Course> {
     return this.http.post<Course>(this.API, course).pipe(
       map(obj => obj),
       catchError(e => this.errorHandler(e))
@@ -44,7 +44,7 @@ export class CoursesService {
   }
 
   //Atualizar curso enviando ao servidor
-  update(course: any) {
+  update(course: Course) {
     return this.http.put(`${this.API}/${course.id}`, course).pipe(
       map(obj => obj),
       catchError(e => this.errorHandler(e))
@@ -52,14 +52,23 @@ export class CoursesService {
   }
 
   //Metodo para salvar curso (adição e edição)
-  save(course: any) {
+  save(course: Course) {
     if (course.id) {
       return this.update(course)
-    } 
+    }
     return this.create(course)
   }
 
-  errorHandler(e: any): Observable<any> {
+  //Método para remover curso
+  remove(id: number) {
+    return this.http.delete(`${this.API}/${id}`).pipe(
+      map(obj => obj),
+      catchError(error => this.errorHandler(error))
+    )
+  }
+
+  // e or error ?
+  errorHandler(error: any): Observable<any> {
     this.alertModalService.showAlertInfo('Erro ao adicionar curso. Tente novamente mais tarde.')
     return EMPTY
   }

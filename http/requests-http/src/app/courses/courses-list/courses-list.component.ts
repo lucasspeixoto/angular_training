@@ -12,6 +12,8 @@ import { CrudOperationComponent } from '../crud-operation/crud-operation.compone
 import { CoursesFormComponent } from '../courses-form/courses-form.component';
 import { HttpParams } from '@angular/common/http';
 import { AddCourseComponent } from '../add-course/add-course.component';
+import { EditCourseComponent } from '../edit-course/edit-course.component';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-courses-list',
@@ -26,9 +28,13 @@ export class CoursesListComponent implements OnInit {
   error$ = new Subject<boolean>()
   modalRef: BsModalRef;
   openEditor: boolean = false
+  deleteModalRef: BsModalRef
+  selectedCourse: Course
+
+  @ViewChild('deleteModal') deleteModal: any
 
   constructor(
-    private service: CoursesService,
+    private coursesService: CoursesService,
     private alertModalService: AlertModalService,
     private router: Router,
     private route: ActivatedRoute,
@@ -40,13 +46,13 @@ export class CoursesListComponent implements OnInit {
    observable continue, consumindo memória, precisamos destruir
    */
   ngOnInit(): void {
-    //this.service.list().subscribe(data => this.courses = data)
+    //this.coursesServicee.list().subscribe(data => this.courses = data)
     this.onRefresh();
   }
 
   onRefresh() {
     this.loadspinner = true
-    this.courses$ = this.service.getCoursesList()
+    this.courses$ = this.coursesService.getCoursesList()
       .pipe(
         //delay(2000),
         catchError((error) => {
@@ -59,28 +65,41 @@ export class CoursesListComponent implements OnInit {
       );
   }
 
-  onAdd2(crudForm: any) {
-    this.modalRef = this.bsmodalservice.show(crudForm)
-  }
+
 
   // Create course
   onAdd() {
     this.router.navigate(['courses/new'])
-    /* this.modalRef.content.event.subscribe(
-      (result: any) => {
-        console.log(result)
-        if (result == 'OK') {
-          this.onRefresh()
-        }
-      }
-    ) */
+  }
+  onAdd2(addForm: any) {
+    this.modalRef = this.bsmodalservice.show(addForm)
   }
 
   // Edit course
   onEdit(id: any) {
     this.router.navigate(['edit', id], { relativeTo: this.route })
   }
+  // Edit course
+  onEdit2(editForm: any) {
+    this.modalRef = this.bsmodalservice.show(editForm)
+  }
 
+  // Delete course
+  onDelete(course: Course) {
+    this.selectedCourse = course //Como o ng-template esta fora do escopo de visualização do nosso html, não conseguimos passar o curso como parâmetro, é necessário a atribuição via componente
+    this.deleteModalRef = this.bsmodalservice.show(this.deleteModal, { class: 'modal-sm' })
+  }
+  OnConfirmDelete() {
+    this.coursesService.remove(this.selectedCourse.id)
+      .subscribe(
+        success => this.onRefresh(),
+        error => this.alertModalService.showAlertDanger('Erro ao deletar curso, tente novamente mais tarde.')
+      )
+    this.deleteModalRef.hide()
+  }
+  OnDeclineDelete() {
+    this.deleteModalRef.hide()
+  }
 
   handleError() {
     this.alertModalService.showAlertDanger('Erro ao carregar, tente novamente mais tarde.')
