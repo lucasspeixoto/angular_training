@@ -1,0 +1,22 @@
+{
+  "postlist": [
+    {
+      "postId": 1,
+      "title": "SQL Server Blog 1 Title",
+      "description": "SQL Server Blog 1 Description",
+      "categoryName": "SQL SERVER"
+    },
+    {
+      "postId": 2,
+      "title": "Asp.Net Core Blog 1 Title",
+      "description": "Asp.Net Core Blog 1 Description",
+      "categoryName": "ASP.NET CORE"
+    },
+    {
+      "postId": 3,
+      "title": "Visual Studio Blog 1 Title",
+      "description": "Visual Studio Blog 1 Description",
+      "categoryName": "VISUAL STUDIO"
+    }
+  ]
+}
