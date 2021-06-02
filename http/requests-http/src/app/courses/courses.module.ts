@@ -10,6 +10,7 @@ import { CrudOperationComponent } from './crud-operation/crud-operation.componen
 import { AddCourseComponent } from './add-course/add-course.component';
 import { EditCourseComponent } from './edit-course/edit-course.component';
 import { DeleteCourseComponent } from './delete-course/delete-course.component';
+import { GenericFormComponent } from './generic-form/generic-form.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { DeleteCourseComponent } from './delete-course/delete-course.component';
     CrudOperationComponent,
     AddCourseComponent,
     EditCourseComponent,
-    DeleteCourseComponent
+    DeleteCourseComponent,
+    GenericFormComponent
   ],
   imports: [
     CommonModule,

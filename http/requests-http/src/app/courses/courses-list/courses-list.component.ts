@@ -3,17 +3,11 @@ import { Course } from './courses';
 
 import { CoursesService } from './../courses.service';
 import { EMPTY, Observable, Subject } from 'rxjs';
-import { catchError, delay, switchMap, take } from 'rxjs/operators';
+import { catchError, switchMap, take } from 'rxjs/operators';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { AlertModalComponent } from 'src/app/shared/alert-modal/alert-modal.component';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CrudOperationComponent } from '../crud-operation/crud-operation.component';
-import { CoursesFormComponent } from '../courses-form/courses-form.component';
-import { HttpParams } from '@angular/common/http';
-import { AddCourseComponent } from '../add-course/add-course.component';
-import { EditCourseComponent } from '../edit-course/edit-course.component';
-import { ThrowStmt } from '@angular/compiler';
+import { GenericFormComponent } from '../generic-form/generic-form.component';
 
 @Component({
   selector: 'app-courses-list',
@@ -30,6 +24,9 @@ export class CoursesListComponent implements OnInit {
   openEditor: boolean = false
   deleteModalRef: BsModalRef
   selectedCourse: Course
+
+  //Parâmetros do form
+  title: string
 
   @ViewChild('deleteModal') deleteModal: any
 
@@ -55,9 +52,7 @@ export class CoursesListComponent implements OnInit {
     this.courses$ = this.coursesService.getCoursesList()
       .pipe(
         //delay(2000),
-        catchError((error) => {
-          console.error(error);
-          //this.error$.next(true);
+        catchError(() => {
           this.loadspinner = false
           this.handleError()
           return EMPTY;
@@ -65,13 +60,12 @@ export class CoursesListComponent implements OnInit {
       );
   }
 
-
-
   // Create course
   onAdd() {
     this.router.navigate(['courses/new'])
   }
   onAdd2(addForm: any) {
+    this.title = 'Add Course'
     this.modalRef = this.bsmodalservice.show(addForm)
   }
 
@@ -79,8 +73,8 @@ export class CoursesListComponent implements OnInit {
   onEdit(id: any) {
     this.router.navigate(['edit', id], { relativeTo: this.route })
   }
-  // Edit course
   onEdit2(editForm: any) {
+    this.title = 'Edit Course'
     this.modalRef = this.bsmodalservice.show(editForm)
   }
 
@@ -112,12 +106,21 @@ export class CoursesListComponent implements OnInit {
       )
     this.deleteModalRef.hide()
   }
+
   OnDeclineDelete() {
     this.deleteModalRef.hide()
   }
 
   handleError() {
     this.alertModalService.showAlertDanger('Erro ao carregar, tente novamente mais tarde.')
+  }
+
+  changedItem(event: any) {
+    console.log('Alterou')
+    if (event == 'changed') {
+      console.log('Alterou')
+      this.onRefresh()
+    }
   }
 
 }

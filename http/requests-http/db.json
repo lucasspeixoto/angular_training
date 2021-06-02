@@ -10,7 +10,7 @@
     },
     {
       "id": 3,
-      "name": "Nest"
+      "name": "Nest js"
     },
     {
       "id": 4,
@@ -18,10 +18,6 @@
     },
     {
       "id": 5,
-      "name": "Git e GitHub Essencial"
-    },
-    {
-      "id": 6,
       "name": "Django Framework"
     }
   ]

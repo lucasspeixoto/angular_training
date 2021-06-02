@@ -6,16 +6,16 @@
     </div>
     <div class="float-right" style="float: right">
       <!-- Add -->
-      <button type="button" class="btn btn-primary" (click)="onAdd()">
+      <!--  <button type="button" class="btn btn-primary" (click)="onAdd()">
         Add Course
       </button>
-      {{ " " }}
+      {{ " " }} -->
       <!-- Modal Add -->
-      <button type="button" class="btn btn-info" (click)="onAdd2(addForm)">
-        Add Course pop
+      <button type="button" class="btn btn-primary" (click)="onAdd2(addForm)">
+        Add Course
       </button>
       <ng-template #addForm>
-        <add-course></add-course>
+        <generic-form [title]="title" (changed)="changedItem($event)"></generic-form>
       </ng-template>
       {{ " " }}
       <button type="button" class="btn btn-dark" (click)="onRefresh()">
@@ -39,29 +39,25 @@
           <th>{{ course.name }}</th>
           <span class="float-right" style="float: right">
             <!-- Edit -->
-            <button
+            <!-- <button
               class="btn btn-outline-warning mb-1 btn-sm"
               (click)="onEdit(course.id)"
             >
               Edit
             </button>
-            {{ " " }}
-            <!-- Edit -->
-            <button
-              class="btn btn-outline-warning mb-1 btn-sm"
-              (click)="onEdit2(editForm)"
-            >
-              Edit pop
+            {{ " " }} -->
+            <!-- Edit 2 -->
+            <button class="btn btn-outline-warning mb-1 btn-sm" (click)="onEdit2(editForm)">
+              Edit
             </button>
             {{ " " }}
             <ng-template #editForm>
-              <edit-course [course]="course"></edit-course>
+              <generic-form [course]="course" [title]="title" (changed)="changedItem($event)"></generic-form>
+              <!--  <edit-course [course]="course"></edit-course> -->
             </ng-template>
+
             <!-- Delete -->
-            <button
-              class="btn btn-outline-danger mb-1 btn-sm"
-              (click)="onDelete(course)"
-            >
+            <button class="btn btn-outline-danger mb-1 btn-sm" (click)="onDelete(course)">
               Delete
             </button>
           </span>
@@ -79,7 +75,7 @@
 <ng-template #deleteModal>
   <div class="modal-body text-center">
     <p>Are you sure you want to delete course?</p>
-    <button type="button" class="btn btn-default" (click)="OnConfirmDelete()" >Yes</button>
-    <button type="button" class="btn btn-primary" (click)="OnDeclineDelete()" >No</button>
+    <button type="button" class="btn btn-default" (click)="OnConfirmDelete()">Yes</button>
+    <button type="button" class="btn btn-primary" (click)="OnDeclineDelete()">No</button>
   </div>
 </ng-template>
