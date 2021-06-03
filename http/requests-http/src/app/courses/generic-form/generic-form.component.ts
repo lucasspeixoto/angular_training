@@ -22,8 +22,12 @@ export class GenericFormComponent implements OnInit {
   @Input('modalRef') modalRef: BsModalRef<any>
   @Input('course') course: Course
   @Input('title') title: string
+  @Input('successMsg') successMsg: string
+  @Input('errorMsg') errorMsg: string
 
   @Output('changeList') changeList = new EventEmitter<any>()
+
+  
 
   constructor(
     private fb: FormBuilder,
@@ -35,6 +39,7 @@ export class GenericFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    //console.log(`Teste: ${modalRef.content.teste}`)
     this.form = this.fb.group({
       id: [this.course?.id],
       name: [this.course?.name, [Validators.required, Validators.minLength(3), Validators.maxLength(30)]]
@@ -57,20 +62,20 @@ export class GenericFormComponent implements OnInit {
     //console.log(this.form.value);
     //Caso formulário esteja válido
     if (this.form.valid) {
-      let successMsg = 'Course add'
+      /* let successMsg = 'Course add'
       let errorMsg = 'Error in create course'
       if (this.form.value.id) {
         successMsg = 'Course Update'
         errorMsg = 'Error in edit course'
-      }
+      } */
       this.coursesService.save(this.form.value)
         .subscribe(
           (success) => {
-            this.alertModalService.showAlertSuccess(successMsg);
+            this.alertModalService.showAlertSuccess(this.successMsg);
 
           },
           (error) => {
-            this.alertModalService.showAlertInfo(errorMsg)
+            this.alertModalService.showAlertInfo(this.errorMsg)
           }
         )
     }

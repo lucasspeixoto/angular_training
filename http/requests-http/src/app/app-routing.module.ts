@@ -5,7 +5,7 @@ const AppRoutes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'courses'
+    redirectTo: 'upload'
   },
   {
     path: 'courses',
@@ -14,6 +14,10 @@ const AppRoutes: Routes = [
   {
     path: 'rxjs-poc',
     loadChildren: () => import('./unsubscribe-rxjs/unsubscribe-rxjs.module').then(m => m.UnsubscribeRxjsModule)
+  },
+  {
+    path: 'upload',
+    loadChildren: () => import('./upload-file/upload-file.module').then(m => m.UploadFileModule)
   }
 ];
 

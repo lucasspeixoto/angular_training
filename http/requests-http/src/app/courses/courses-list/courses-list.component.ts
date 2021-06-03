@@ -3,11 +3,13 @@ import { Course } from './courses';
 
 import { CoursesService } from './../courses.service';
 import { EMPTY, Observable, Subject } from 'rxjs';
-import { catchError, switchMap, take } from 'rxjs/operators';
+import { catchError, switchMap, take, throttleTime } from 'rxjs/operators';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AlertModalService } from 'src/app/shared/alert-modal.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GenericFormComponent } from '../generic-form/generic-form.component';
+
+
 
 @Component({
   selector: 'app-courses-list',
@@ -27,6 +29,8 @@ export class CoursesListComponent implements OnInit {
 
   //Parâmetros do form
   title: string
+  successMsg: string
+  errorMsg: string
 
   @ViewChild('deleteModal') deleteModal: any
 
@@ -66,6 +70,8 @@ export class CoursesListComponent implements OnInit {
   }
   onAdd2(addForm: any) {
     this.title = 'Add Course'
+    this.successMsg = 'Course add'
+    this.errorMsg = 'Error in add course'
     this.modalRef = this.bsmodalservice.show(addForm)
   }
 
@@ -75,6 +81,8 @@ export class CoursesListComponent implements OnInit {
   }
   onEdit2(editForm: any) {
     this.title = 'Edit Course'
+    this.successMsg = 'Course updated'
+    this.errorMsg = 'Error in edit course'
     this.modalRef = this.bsmodalservice.show(editForm)
   }
 
