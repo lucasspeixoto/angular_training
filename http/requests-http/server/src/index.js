@@ -8,12 +8,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json()) // To parse the incoming requests with JSON payloads
 
 //O cors vai permitir a comunicação entre o server node com o Angular
-const corsOptions = {
+/* const corsOptions = {
     origin: '*',
     optionsSuccessStatus: 200,
 };
 
-app.use(cors(corsOptions))
+app.use(cors(corsOptions)) */
 
 const multipartyMiddleware = multiparty({ uploadDir: './uploads' })
 app.post('/uploads', multipartyMiddleware, (req, res) => {
