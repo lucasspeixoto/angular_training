@@ -1,6 +1,23 @@
-<div class="col-sm-6" style="margin-top: 10px;">
+<div class="col-sm-6" style="margin-top: 10px">
   <div class="input-group mb-3">
-    <input type="file" class="form-control" id="customFile" (change)="onChange($event)" multiple/>
-    <label class="input-group-text" for="customFile" id="customFileLabel">Upload</label>
+    <input
+      type="file"
+      class="form-control"
+      id="customFile"
+      (change)="onChange($event)"
+      multiple
+    />
+    <!-- <label class="input-group-text" for="customFile" id="customFileLabel">Upload</label> -->
+  </div>
+  <div class="col-sm-1">
+    <button
+      type="button"
+      class="btn btn-primary"
+      style="margin-top: 10px"
+      (click)="onUpload()"
+      [disabled]="!files"
+    >
+      Upload
+    </button>
   </div>
 </div>

@@ -16,7 +16,7 @@ const corsOptions = {
 app.use(cors(corsOptions))
 
 const multipartyMiddleware = multiparty({ uploadDir: './uploads' })
-app.post('/upload', multipartyMiddleware, (req, res) => {
+app.post('/uploads', multipartyMiddleware, (req, res) => {
     const files = req.files
     console.log(files)
     res.json({ message: files })
