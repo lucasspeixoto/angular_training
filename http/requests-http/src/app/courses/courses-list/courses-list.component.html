@@ -1,34 +1,22 @@
 <br />
-<div class="card mt-3">
-  <div class="card-header">
+<div class="background">
+  <div class="container">
     <div class="float-left" style="float: left">
       <h4>Courses</h4>
     </div>
     <div class="float-right" style="float: right">
-      <!-- Add -->
-      <!--  <button type="button" class="btn btn-primary" (click)="onAdd()">
-        Add Course
-      </button>
-      {{ " " }} -->
-      <!-- Modal Add -->
-      <button type="button" class="btn btn-primary" (click)="onAdd2(addForm)">
+      <button type="button" class="btn btn-primary" (click)="onAdd(addForm)">
         <a>
           <i class="bi bi-plus-square"></i>
         </a>
       </button>
       <ng-template #addForm>
-        <generic-form
-          [title]="title"
-          [successMsg]="successMsg"
-          [errorMsg]="errorMsg"
-          (changed)="changedItem($event)"
-        ></generic-form>
+        <generic-form [title]="title" [successMsg]="successMsg" [errorMsg]="errorMsg" (changedList)="changedItem($event)">
+        </generic-form>
       </ng-template>
       {{ " " }}
       <button type="button" class="btn btn-dark" (click)="onRefresh()">
-        <a>
-          <i class="bi bi-arrow-repeat"></i>
-        </a>
+        <a><i class="bi bi-arrow-repeat"></i></a>
       </button>
     </div>
   </div>
@@ -44,46 +32,21 @@
       </thead>
       <tbody>
         <tr *ngFor="let course of courses">
-          <th>{{ course.id }}</th>
+          <th>{{ course.id }}º</th>
           <th>{{ course.name }}</th>
           <span class="float-right" style="float: right">
-            <!-- Edit -->
-            <!-- <button
-              class="btn btn-outline-warning mb-1 btn-sm"
-              (click)="onEdit(course.id)"
-            >
-              Edit
-            </button>
-            {{ " " }} -->
-            <!-- Edit 2 -->
-            <button
-              class="btn btn-outline-warning mb-1 btn-sm"
-              (click)="onEdit2(editForm)"
-            >
-              <a>
-                <i class="bi bi-brush"></i>
-              </a>
+            <button class="btn btn-outline-warning mb-1 btn-sm" (click)="onEdit(editForm)">
+              <a><i class="bi bi-brush"></i></a>
             </button>
             {{ " " }}
             <ng-template #editForm>
-              <generic-form
-                [course]="course"
-                [title]="title"
-                [successMsg]="successMsg"
-                [errorMsg]="errorMsg"
-                (changed)="changedItem($event)"
-              ></generic-form>
-              <!--  <edit-course [course]="course"></edit-course> -->
+              <generic-form [course]="course" [title]="title" [successMsg]="successMsg" [errorMsg]="errorMsg"
+                (changedList)="changedItem($event)"></generic-form>
             </ng-template>
 
             <!-- Delete -->
-            <button
-              class="btn btn-outline-danger mb-1 btn-sm"
-              (click)="onDelete(course)"
-            >
-              <a>
-                <i class="bi bi-trash"></i>
-              </a>
+            <button class="btn btn-outline-danger mb-1 btn-sm" (click)="onDelete(course)">
+              <a><i class="bi bi-trash"></i></a>
             </button>
           </span>
         </tr>

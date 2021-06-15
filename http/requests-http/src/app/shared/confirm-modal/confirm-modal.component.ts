@@ -11,7 +11,7 @@ export class ConfirmModalComponent implements OnInit {
 
   // Parâmetros do modal que serão passados dinamicamente
   @Input('title') title: string
-  @Input('msg') msg: string 
+  @Input('msg') msg: string
   @Input('cancelTxt') cancelTxt = 'Cancel'
   @Input('okTxt') okTxt = 'Confirm'
 
@@ -37,7 +37,5 @@ export class ConfirmModalComponent implements OnInit {
     this.confirmResult.next(value)
     this.bsModalRef.hide()
   }
-
-  
 
 }

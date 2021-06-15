@@ -10,11 +10,47 @@
     },
     {
       "id": 3,
-      "name": "Nest js"
+      "name": "Nest JS"
     },
     {
       "id": 4,
       "name": "Vue"
+    },
+    {
+      "id": 6,
+      "name": "React Native"
+    },
+    {
+      "id": 7,
+      "name": "Flutter"
+    },
+    {
+      "id": 8,
+      "name": "Python 3"
+    },
+    {
+      "id": 9,
+      "name": ".Net Framework"
+    },
+    {
+      "id": 10,
+      "name": "Cobol"
+    },
+    {
+      "id": 11,
+      "name": "Django Framework"
+    },
+    {
+      "id": 12,
+      "name": "Git e GitHub Essencial"
+    },
+    {
+      "id": 13,
+      "name": "PHP"
+    },
+    {
+      "id": 14,
+      "name": "JavaScript"
     }
   ]
 }

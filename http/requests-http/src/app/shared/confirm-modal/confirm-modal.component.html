@@ -1,13 +1,7 @@
 <div class="modal-content">
   <div class="modal-header">
     <h5 class="modal-title" style="color: #3166b6">{{ title }}</h5>
-    <button
-      type="button"
-      class="close pull-top btn-danger"
-      data-dismiss="modal"
-      aria-label="Close"
-      (click)="onClose()"
-    >
+    <button type="button" class="close pull-top btn-danger" data-dismiss="modal" aria-label="Close" (click)="onClose()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -18,12 +12,7 @@
     <button type="button" class="btn btn-primary" (click)="onConfirm()">
       {{ okTxt }}
     </button>
-    <button
-      type="button"
-      class="btn btn-dark"
-      data-dismiss="modal"
-      (click)="onClose()"
-    >
+    <button type="button" class="btn btn-dark" data-dismiss="modal" (click)="onClose()">
       {{ cancelTxt }}
     </button>
   </div>

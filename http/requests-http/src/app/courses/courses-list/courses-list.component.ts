@@ -46,8 +46,7 @@ export class CoursesListComponent implements OnInit {
   /* Mesmo após a destruição do componente, pode ser que a inscrição no
    observable continue, consumindo memória, precisamos destruir
    */
-  ngOnInit(): void {
-    //this.coursesServicee.list().subscribe(data => this.courses = data)
+  ngOnInit() {
     this.onRefresh();
   }
 
@@ -55,7 +54,6 @@ export class CoursesListComponent implements OnInit {
     this.loadspinner = true
     this.courses$ = this.coursesService.getCoursesList()
       .pipe(
-        //delay(2000),
         catchError(() => {
           this.loadspinner = false
           this.handleError()
@@ -65,25 +63,19 @@ export class CoursesListComponent implements OnInit {
   }
 
   // Create course
-  onAdd() {
-    this.router.navigate(['courses/new'])
-  }
-  onAdd2(addForm: any) {
+  onAdd(form: any) {
     this.title = 'Add Course'
     this.successMsg = 'Course add'
     this.errorMsg = 'Error in add course'
-    this.modalRef = this.bsmodalservice.show(addForm)
+    this.modalRef = this.bsmodalservice.show(form)
   }
 
   // Edit course
-  onEdit(id: any) {
-    this.router.navigate(['edit', id], { relativeTo: this.route })
-  }
-  onEdit2(editForm: any) {
+  onEdit(form: any) {
     this.title = 'Edit Course'
     this.successMsg = 'Course updated'
     this.errorMsg = 'Error in edit course'
-    this.modalRef = this.bsmodalservice.show(editForm)
+    this.modalRef = this.bsmodalservice.show(form)
   }
 
   // Delete course
@@ -124,11 +116,7 @@ export class CoursesListComponent implements OnInit {
   }
 
   changedItem(event: any) {
-    console.log('Alterou')
-    if (event == 'changed') {
-      console.log('Alterou')
-      this.onRefresh()
-    }
+    this.onRefresh()
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -7,7 +7,6 @@ import { Course } from '../courses-list/courses';
 import { CoursesService } from '../courses.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-
 
 @Component({
   selector: 'generic-form',
@@ -25,9 +24,8 @@ export class GenericFormComponent implements OnInit {
   @Input('successMsg') successMsg: string
   @Input('errorMsg') errorMsg: string
 
-  @Output('changeList') changeList = new EventEmitter<any>()
+  @Output('changedList') changedList = new EventEmitter<any>()
 
-  
 
   constructor(
     private fb: FormBuilder,
@@ -71,17 +69,16 @@ export class GenericFormComponent implements OnInit {
       this.coursesService.save(this.form.value)
         .subscribe(
           (success) => {
+            this.changedList.emit()
             this.alertModalService.showAlertSuccess(this.successMsg);
-
+            this.backToCourses()
           },
           (error) => {
             this.alertModalService.showAlertInfo(this.errorMsg)
           }
         )
     }
-    this.changeList.emit('changed')
-    this.backToCourses()
-    
+
 
   }
 
