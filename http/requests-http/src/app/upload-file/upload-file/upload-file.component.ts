@@ -1,3 +1,4 @@
+import { HttpEvent, HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { UploadFileService } from '../upload-file.service';
@@ -11,6 +12,8 @@ export class UploadFileComponent implements OnInit {
 
   files: Set<File>
 
+  progress: number = 0
+
   constructor(
     private uploadFileService: UploadFileService
   ) { }
@@ -20,21 +23,33 @@ export class UploadFileComponent implements OnInit {
 
   onChange(event: any) {
     const selectedFiles = <FileList>event.target.files
-  
+
     const fileNames = []
     this.files = new Set()
-    for (let file=0; file<selectedFiles.length; file++) {
+    for (let file = 0; file < selectedFiles.length; file++) {
       fileNames.push(selectedFiles[file].name)
       this.files.add(selectedFiles[file])
     }
 
-    console.log(fileNames)
+    this.progress = 0
+    //console.log(fileNames)
   }
 
   onUpload() {
     if (this.files && this.files.size > 0) {
-      this.uploadFileService.upload(this.files, environment.BASE_URL +  '/uploads' )
-      .subscribe(response => console.log('Upload Concluído'))
+      this.uploadFileService.upload(this.files, environment.BASE_URL + '/uploads')
+        .subscribe((event: any /*HttpEvent<Object>*/) => {
+          console.log(event)
+          if (event.type === HttpEventType.Response) {
+            console.log('Upload Concluído');
+          }
+          else if (event.type === HttpEventType.UploadProgress){
+            const percentDone = Math.round((event.loaded * 100) / event.total);
+            console.log(`Progresso: ${percentDone}`)
+            this.progress = percentDone
+          }
+        }
+        )
     }
   }
 }
