@@ -22,6 +22,16 @@ app.post('/uploads', multipartyMiddleware, (req, res) => {
     res.json({ message: files })
 })
 
+// Endpoint download Excel
+app.get('/downloadExcel', (req, res) => {
+    res.download('./uploads/teste.xlsx')
+})
+
+// Enpoint download PDF
+app.get('/downloadPDF', (req, res) => {
+    res.download('./uploads/teste.pdf')
+})
+
 app.use((err, req, res, next) => res.json({ error: err.message }))
 
 app.listen(8000, () => {

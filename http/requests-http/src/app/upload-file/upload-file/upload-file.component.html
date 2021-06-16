@@ -1,14 +1,27 @@
 <div class="col-sm-6" style="margin-top: 10px">
   <div class="input-group mb-3">
     <input type="file" class="form-control" id="customFile" (change)="onChange($event)" multiple />
-    <!-- <label class="input-group-text" for="customFile" id="customFileLabel">Upload</label> -->
   </div>
   <div class="progress">
     <div class="progress-bar" role="progressbar" [style.width]="progress + '%'">{{progress}}</div>
   </div>
-  <div class="col-sm-1">
-    <button type="button" class="btn btn-primary" style="margin-top: 10px" (click)="onUpload()" [disabled]="!files">
-      Upload
-    </button>
+  <div class="input-group">
+    <div class="col-sm-2">
+      <button type="button" class="btn btn-primary upload" (click)="onUpload()" [disabled]="!files">
+        Upload
+      </button>
+    </div>
+    <div class="col-sm-2">
+      <button type="button" class="btn bi-file-earmark-excel-fill excel"
+        (click)="downExcel()">
+        Excel
+      </button>
+    </div>
+    <div class="col-sm-2">
+      <button type="button" class="btn bi-file-pdf pdf"
+        (click)="downPDF()">
+        PDF
+      </button>
+    </div>
   </div>
 </div>
