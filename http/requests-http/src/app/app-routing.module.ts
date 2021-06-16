@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ReactiveSearchModule } from './reactive-search/reactive-search.module';
 
 const AppRoutes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'upload'
+    redirectTo: 'reactive-search'
   },
   {
     path: 'courses',
@@ -18,6 +19,10 @@ const AppRoutes: Routes = [
   {
     path: 'upload',
     loadChildren: () => import('./upload-file/upload-file.module').then(m => m.UploadFileModule)
+  },
+  {
+    path: 'reactive-search',
+    loadChildren: () => import('./reactive-search/reactive-search.module').then(m => m.ReactiveSearchModule)
   }
 ];
 

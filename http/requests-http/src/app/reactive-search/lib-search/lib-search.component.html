@@ -1,0 +1,33 @@
+<div class="container search-table">
+    <div class="search-box">
+        <div class="row">
+            <div class="col-md-4 search-input">
+                <input type="text" id="inputField" #inputField class="form-control" [formControl]="queryField" placeholder="Search lib ...">
+            </div>
+            {{' '}}
+            <div class="col-md-1 search-button">
+                <button class="btn btn-medium btn-success" (click)="onSearch()">
+                    Search
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="search-list">
+        <h3>303 Records Found</h3>
+        <table class="table" id="myTable">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>HTML</td>
+                    <td>Web Development</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

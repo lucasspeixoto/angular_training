@@ -6,19 +6,11 @@ import { CoursesListComponent } from './courses-list/courses-list.component';
 import { CourseResolverGuard } from './guards/course-resolver.guard'; */
 
 const CoursesRoutes: Routes = [
-  { path: '', component: CoursesListComponent },
-  /* {
-    path: 'new', component: CoursesFormComponent,
-    resolve: {
-      course: CourseResolverGuard
-    }
-  },
+
   {
-    path: 'edit/:id', component: CoursesFormComponent,
-    resolve: {
-      course: CourseResolverGuard
-    }
-  } */
+    path: '',
+    component: CoursesListComponent
+  },
 ];
 
 @NgModule({

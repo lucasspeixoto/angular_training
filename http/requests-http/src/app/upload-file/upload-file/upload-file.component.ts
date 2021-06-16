@@ -79,7 +79,6 @@ export class UploadFileComponent implements OnInit {
    this.downFile('report', 'xlsx')
   }
 
-
   downPDF() {
     this.downFile('report', 'pdf')
   }
