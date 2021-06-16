@@ -2,7 +2,8 @@
     <div class="search-box">
         <div class="row">
             <div class="col-md-4 search-input">
-                <input type="text" id="inputField" #inputField class="form-control" [formControl]="queryField" placeholder="Search lib ...">
+                <input type="text" id="inputField" #inputField class="form-control" [formControl]="queryField"
+                    placeholder="Search lib ...">
             </div>
             {{' '}}
             <div class="col-md-1 search-button">
@@ -13,18 +14,20 @@
         </div>
     </div>
     <div class="search-list">
-        <h3>303 Records Found</h3>
+        <h3>{{total}} Records Found</h3>
         <table class="table" id="myTable">
             <thead>
                 <tr>
-                    <th>Title</th>
-                    <th>Category</th>
+                    <th>Lib</th>
+                    <th>Version</th>
+                    <th>Url</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>HTML</td>
-                    <td>Web Development</td>
+                <tr *ngFor="let result of results$ | async">
+                    <td>{{result.name}}</td>
+                    <td>{{result.version}}</td>
+                    <td>{{result.latest}}</td>
                 </tr>
             </tbody>
         </table>

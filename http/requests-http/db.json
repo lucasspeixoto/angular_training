@@ -6,7 +6,7 @@
     },
     {
       "id": 2,
-      "name": "React"
+      "name": "React JS"
     },
     {
       "id": 3,
@@ -33,10 +33,6 @@
       "name": ".Net Framework"
     },
     {
-      "id": 10,
-      "name": "Cobol"
-    },
-    {
       "id": 11,
       "name": "Django Framework"
     },
@@ -55,6 +51,10 @@
     {
       "id": 15,
       "name": "Flask"
+    },
+    {
+      "id": 16,
+      "name": "Java"
     }
   ]
 }
